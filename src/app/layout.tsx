@@ -1,3 +1,5 @@
+import Footer from "@/components/layout/Footer";
+import Navbar from "@/components/layout/Navbar";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/providers/theme-provider";
 import WagmiProvider from "@/providers/wagmi-provider";
@@ -24,10 +26,10 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {/* <Navbar /> */}
+            <Navbar />
             {children}
-            {/* <Footer />
-            <DialogLayout />
+            <Footer />
+            {/* <DialogLayout />
             <DrawerLayout /> */}
             <Toaster />
           </ThemeProvider>

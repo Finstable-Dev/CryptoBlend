@@ -8,7 +8,6 @@ import {
 } from "@rainbow-me/rainbowkit";
 import {
   coinbaseWallet,
-  imTokenWallet,
   metaMaskWallet,
   rainbowWallet,
   trustWallet,
@@ -24,18 +23,11 @@ const { chains, publicClient } = configureChains(
 );
 const projectId = "e7b8cffe1cec205cb8d5c1c933e07a9d" || "";
 
-// const { wallets } = getDefaultWallets({
-//   appName: 'Game Link App',
-//   projectId,
-//   chains,
-// });
-
 const connectors = connectorsForWallets([
   // ...wallets,
   {
     groupName: "Popular",
     wallets: [
-      imTokenWallet({ projectId, chains }),
       rainbowWallet({ projectId, chains }),
       coinbaseWallet({ appName: "", chains }),
       metaMaskWallet({ chains, projectId }),
