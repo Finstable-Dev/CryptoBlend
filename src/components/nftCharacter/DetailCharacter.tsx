@@ -25,11 +25,18 @@ export const DetailCharacter = () => {
   }, [address]);
 
   return (
-    <div className=" flex flex-col items-center max-w-[430px] w-full border-[1px] rounded-[16px] py-10 ">
-      <div>
+    <div
+      className=" flex flex-col relative items-center max-w-[430px] w-full border-[1px] rounded-[16px] py-10 bg-[#18181b]"
+      style={{
+        boxShadow: "0px 0px 8px 3px rgba(255, 112, 0, 0.20)",
+      }}
+    >
+      <div className=" absolute right-18 top-0  w-[232px] h-[232px] bg-[#FF7000] opacity-[.3] blur-[100px] z-10" />
+
+      <div className="z-20">
         <Image
-          className="w-[160px] h-[160px]"
-          src="/charactor.png"
+          className="w-[160px] h-[160px] "
+          src="/charactor2.png"
           width={160}
           height={160}
           alt="logo"
@@ -37,11 +44,11 @@ export const DetailCharacter = () => {
       </div>
 
       <div>
-        <span className=" text-[#FF7000] text-[32px] font-semibold">
+        <span className=" text-[#ffffff] text-[32px] font-semibold">
           NFT Character
         </span>
         <div className=" flex flex-row justify-center items-center ">
-          <p className=" text-[14px] text-[#5D5D5D] font-medium ">
+          <p className=" text-[14px] text-[#f6f6f6] font-medium ">
             {shortAddress || "0xC0...9d15"}
           </p>
           <Copy
@@ -54,8 +61,8 @@ export const DetailCharacter = () => {
         </div>
       </div>
 
-      <div className=" flex flex-row justify-center items-center pt-7 pb-5">
-        <h2 className="text-[#5D5D5D] font-medium mr-3">LEVEL:</h2>
+      <div className=" flex flex-row justify-center items-center pt-7 pb-5 ">
+        <h2 className="text-[#f6f6f6] font-medium mr-3">LEVEL:</h2>
 
         <Image
           className="w-[19.13px] h-[21px] mr-2"
@@ -64,18 +71,22 @@ export const DetailCharacter = () => {
           height={21}
           alt="logo"
         />
-        <h2 className="text-[#5D5D5D] font-medium">Bronze</h2>
+        <h2 className="text-[#f6f6f6] font-medium">Bronze</h2>
       </div>
 
-      <div className=" flex flex-row relative justify-center items-center w-fll gap-x-1 pt-7">
-        <h6>EXP</h6>
+      <div className=" flex flex-row relative justify-center items-center w-fll gap-x-1 pt-7 ">
+        <h6 className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#FFA532] to-[#FF7000]">
+          EXP
+        </h6>
         <Progress
           color="white"
           value={progress}
           className="w-[289px] h-[10px]"
         />
-        <h6>100%</h6>
-        <div className=" text-[10px] font-semibold absolute top-4 left-14">
+        <h6 className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#FFA532] to-[#FF7000]">
+          100%
+        </h6>
+        <div className=" text-[10px] font-semibold absolute top-4 left-14 text-transparent bg-clip-text bg-gradient-to-r from-[#FFA532] to-[#FF7000]">
           10%
         </div>
       </div>

@@ -54,8 +54,8 @@ export const CountDown: NextPage = () => {
             <div>
               <span>days</span>
               <div className="flex flex-col items-center justify-center">
-                <div className="flex items-center justify-center border-[1.3px] h-[35px] w-[37px] border-[#FFA532] rounded-[6.837px] ">
-                  <span>{days}</span>
+                <div className="flex items-center justify-center border-[1.3px] h-[40px] w-[42px]  border-[#FFA532] rounded-[6.837px] ">
+                  <span className=" text-2xl font-semibold">{days}</span>
                 </div>
               </div>
             </div>
@@ -63,24 +63,24 @@ export const CountDown: NextPage = () => {
 
             <div className="flex flex-col items-center justify-center">
               <span>hours</span>
-              <div className=" flex items-center justify-center border-[1.3px] h-[35px] w-[37px]  border-[#FFA532] rounded-[6.837px] ">
-                <span>{hours}</span>
+              <div className=" flex items-center justify-center border-[1.3px] h-[40px] w-[42px]   border-[#FFA532] rounded-[6.837px] ">
+                <span className="text-2xl font-semibold">{hours}</span>
               </div>
             </div>
             <span className="pb-2">:</span>
 
             <div className="flex flex-col items-center justify-center">
               <span>minutes</span>
-              <div className=" flex items-center justify-center border-[1.3px] h-[35px] w-[37px]  border-[#FFA532] rounded-[6.837px] ">
-                <span>{minutes}</span>
+              <div className=" flex items-center justify-center border-[1.3px] h-[40px] w-[42px]   border-[#FFA532] rounded-[6.837px] ">
+                <span className="text-2xl font-semibold">{minutes}</span>
               </div>
             </div>
             <span className="pb-2">:</span>
 
             <div className="flex flex-col items-center justify-center">
               <span>seconds</span>
-              <div className=" flex items-center justify-center border-[1.3px] h-[35px] w-[37px]  border-[#FFA532] rounded-[6.837px] ">
-                <span>{seconds}</span>
+              <div className=" flex items-center justify-center border-[1.3px] h-[40px] w-[42px]  border-[#FFA532] rounded-[6.837px] ">
+                <span className=" text-2xl font-semibold">{seconds}</span>
               </div>
             </div>
           </div>

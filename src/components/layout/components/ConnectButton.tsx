@@ -51,7 +51,7 @@ export const ConnectButtonCustom = () => {
                         "linear-gradient(282.7deg, #FFA532 0%, #FF7000 72.62%)",
                     }}
                   >
-                    <h5 className="lg:block hidden text-white">
+                    <h5 className="lg:block hidden text-white font-medium">
                       Connect wallet
                     </h5>
                   </Button>

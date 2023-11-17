@@ -22,7 +22,7 @@ export default function RootLayout({
         <WagmiProvider>
           <ThemeProvider
             attribute="class"
-            defaultTheme="light"
+            defaultTheme="dark"
             enableSystem
             disableTransitionOnChange
           >
