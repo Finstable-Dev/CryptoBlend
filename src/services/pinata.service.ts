@@ -5,7 +5,7 @@ const NFTStorageUploadFolder = async (imageBaseUrl: string) => {
   const client = new NFTStorage({ token: NFT_STORAGE_TOKEN });
 
   const files = [];
-  for (let i = 1; i <= 3; i++) {
+  for (let i = 1; i <= 10; i++) {
     files.push(
       new File(
         [
