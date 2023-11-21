@@ -19,7 +19,7 @@ const Footer = () => {
           alt="logo"
         />
       </Link>
-      <h6 className="text-white">Copyright ©2023 CoffNFT.co</h6>
+      <h6 className="text-white text-right">Copyright ©2023 CoffNFT.co</h6>
     </div>
   );
 };

@@ -1,15 +1,15 @@
-import { create, StoreApi } from 'zustand';
-import { devtools } from 'zustand/middleware';
+import { create, StoreApi } from "zustand";
+import { devtools } from "zustand/middleware";
 
-import { DrawerViews, IDrawer } from './drawer.type';
+import { DrawerViews, IDrawer } from "./drawer.type";
 
 const initialState = {
   displayDrawer: false,
-  drawerView: DrawerViews.CART,
+  drawerView: DrawerViews.CLAIMDIALOG,
 };
 
 const useDrawer = create(
-  devtools((set: StoreApi<IDrawer>['setState']) => ({
+  devtools((set: StoreApi<IDrawer>["setState"]) => ({
     ...initialState,
     openDrawer: () => {
       set({ displayDrawer: true });

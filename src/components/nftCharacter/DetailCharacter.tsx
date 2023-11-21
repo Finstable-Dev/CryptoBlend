@@ -26,7 +26,7 @@ export const DetailCharacter = () => {
 
   return (
     <div
-      className=" flex flex-col relative items-center max-w-[430px] w-full border-[1px] rounded-[16px] py-10 bg-[#18181b]"
+      className=" flex flex-col relative justify-center text-center items-center max-w-[430px] h-[450px] w-full border-[1px] rounded-[16px] py-10 bg-[#18181b] border-[#FFA532] opacity-[.9]"
       style={{
         boxShadow: "0px 0px 8px 3px rgba(255, 112, 0, 0.20)",
       }}
@@ -43,7 +43,7 @@ export const DetailCharacter = () => {
         />
       </div>
 
-      <div>
+      <div className=" w-full">
         <span className=" text-[#ffffff] text-[32px] font-semibold">
           NFT Character
         </span>
@@ -65,10 +65,10 @@ export const DetailCharacter = () => {
         <h2 className="text-[#f6f6f6] font-medium mr-3">LEVEL:</h2>
 
         <Image
-          className="w-[19.13px] h-[21px] mr-2"
+          className=" w-[35px] h-[35px]  mr-2"
           src="/Bronze.png"
-          width={19.13}
-          height={21}
+          width={35}
+          height={35}
           alt="logo"
         />
         <h2 className="text-[#f6f6f6] font-medium">Bronze</h2>
@@ -81,7 +81,7 @@ export const DetailCharacter = () => {
         <Progress
           color="white"
           value={progress}
-          className="w-[289px] h-[10px]"
+          className=" w-[250px] lg:w-[289px] h-[10px]"
         />
         <h6 className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#FFA532] to-[#FF7000]">
           100%

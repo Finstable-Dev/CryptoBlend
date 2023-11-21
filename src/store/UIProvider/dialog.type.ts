@@ -1,5 +1,7 @@
 export enum DialogViews {
-  DETAIL_COLLECTION_DIALOG = "detail-collection-dialog",
+  CLAIM_DIALOG = "claim-dialog",
+  QR_DIALOG = "qr-dialog",
+  SCAN_QR = "scan-qr",
 }
 
 export interface IDialog {

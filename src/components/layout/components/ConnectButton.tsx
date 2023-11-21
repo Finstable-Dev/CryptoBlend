@@ -44,16 +44,17 @@ export const ConnectButtonCustom = () => {
                     onClick={openConnectModal}
                     type="button"
                     variant="ghost"
-                    className="lg:border-[1px] border-[0px] px-3 font-semibold "
+                    className="lg:border-[1px] border-[0px] w-full px-3 font-semibold "
                     style={{
                       borderRadius: "99px",
                       background:
                         "linear-gradient(282.7deg, #FFA532 0%, #FF7000 72.62%)",
                     }}
                   >
-                    <h5 className="lg:block hidden text-white font-medium">
+                    <h5 className=" text-white font-medium lg:block hidden">
                       Connect wallet
                     </h5>
+                    <Wallet className="block lg:hidden" />
                   </Button>
                 );
               }

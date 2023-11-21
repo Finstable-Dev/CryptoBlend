@@ -98,6 +98,12 @@
   .scrollbar::-webkit-scrollbar-thumb:hover {
     background: #18181b;
   }
+  .icon {
+    color: white;
+  }
+  .icon:hover {
+    color: #ffa532;
+  }
 }
 
 @layer base {

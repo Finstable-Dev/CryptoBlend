@@ -1,5 +1,5 @@
 export enum DrawerViews {
-  CART = 'Cart',
+  CLAIMDIALOG = "ClaimDialog",
 }
 
 export interface IDrawer {

@@ -2,6 +2,8 @@
 
 import useDrawer from "@/store/UIProvider/drawer.store";
 
+import { ClaimDialog } from "@/components/dialog/ClaimDialog";
+import { DrawerViews } from "@/store/UIProvider/drawer.type";
 import { Sheet } from "../../ui/sheet";
 
 function DrawerUI() {
@@ -9,7 +11,7 @@ function DrawerUI() {
 
   return (
     <Sheet open={displayDrawer} onOpenChange={closeDrawer}>
-      {/* {drawerView === DrawerViews.CART && <Cart />} */}
+      {drawerView === DrawerViews.CLAIMDIALOG && <ClaimDialog />}
     </Sheet>
   );
 }

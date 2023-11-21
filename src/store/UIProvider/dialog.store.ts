@@ -5,7 +5,7 @@ import { DialogViews, IDialog } from "./dialog.type";
 
 const initialState = {
   displayDialog: false,
-  dialogView: DialogViews.DETAIL_COLLECTION_DIALOG,
+  dialogView: DialogViews.CLAIM_DIALOG,
 };
 
 const useDialog = create(

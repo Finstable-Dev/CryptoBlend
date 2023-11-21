@@ -1,17 +1,21 @@
+import Mouse from "@/components/animation/mouse";
 import { CountdownCampaign } from "@/components/nftCharacter/CountdownCampaign";
 import { DetailCharacter } from "@/components/nftCharacter/DetailCharacter";
 import { CollectionDetail } from "@/components/nftCollection/CollectionDetail";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between  ">
-      <div className="bg-[url('/bgblack.png')] w-full h-[751px] bg-cover bg-bottom bg-no-repeat ">
-        <div className="flex  flex-row justify-between pt-32 px-32 ">
+    <main className="flex h-full   flex-col items-center justify-center bg-[rgba(0,0,0,0.75)] ">
+      <div
+        className="bg-[url('/bgblack.png')] w-full  xl:h-[751px] bg-cover bg-bottom  "
+        style={{ boxShadow: "inset 10px -110px 100px -10px black" }}
+      >
+        <div className="flex flex-col-reverse xl:flex-row justify-center  xl:justify-between items-center pt-32 px-4 1xl:px-32  xl:gap-10">
           <CountdownCampaign />
           <DetailCharacter />
         </div>
       </div>
-
+      <Mouse />
       <CollectionDetail />
     </main>
   );

@@ -51,7 +51,7 @@ export const CountDownNfr: React.FC<CountDownNfrProps> = ({ date }) => {
         </>
       ) : (
         <>
-          <div className="flex felx-row w-full justify-center text-center items-end gap-x-1 ">
+          <div className="flex felx-row w-full justify-center text-center items-end gap-x-1 px-3 py-1">
             <span className="text-tertiary">
               {hours}h:{minutes}m:{seconds}s
             </span>

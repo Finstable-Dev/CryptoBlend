@@ -1,5 +1,7 @@
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
+import DialogLayout from "@/components/layout/components/DialogLayout";
+import DrawerLayout from "@/components/layout/components/DrawerLayout";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/providers/theme-provider";
 import WagmiProvider from "@/providers/wagmi-provider";
@@ -29,8 +31,8 @@ export default function RootLayout({
             <Navbar />
             {children}
             <Footer />
-            {/* <DialogLayout />
-            <DrawerLayout /> */}
+            <DialogLayout />
+            <DrawerLayout />
             <Toaster />
           </ThemeProvider>
         </WagmiProvider>

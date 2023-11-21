@@ -80,6 +80,18 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      screens: {
+        ssm: "450px",
+        lm: "820px",
+        "1xl": "1440px",
+        "11xl": "1550px",
+        // @media  max-width
+        mxs: { max: "375px" },
+        mss: { max: "480px" },
+        mmd: { max: "768px" },
+        mwt: { max: "820px" },
+        mlg: { max: "1024px" },
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

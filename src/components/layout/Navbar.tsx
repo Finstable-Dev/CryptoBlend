@@ -3,11 +3,19 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import useDialog from "@/store/UIProvider/dialog.store";
+import { DialogViews } from "@/store/UIProvider/dialog.type";
 import { ScanLine } from "lucide-react";
 import { ConnectButtonCustom } from "./components/ConnectButton";
 import GasButton from "./components/GasButton";
 
 export default function Navbar() {
+  const { openDialog, setDialogView } = useDialog();
+
+  const onClickOpen = () => {
+    setDialogView(DialogViews.SCAN_QR);
+    openDialog();
+  };
   return (
     <>
       <div
@@ -28,7 +36,10 @@ export default function Navbar() {
         </Link>
         <div className="flex flex-row items-center justify-center gap-5">
           {/* <ModeToggle /> */}
-          <div className="flex flex-row items-center justify-center gap-2 border-[1px] border-[#FF7000] px-3 py-[10px] rounded-full bg-[#461804]">
+          <div
+            onClick={() => onClickOpen()}
+            className="flex flex-row items-center justify-center gap-2 border-[1px] border-[#FF7000] px-3 py-[10px] rounded-full bg-[#461804] cursor-pointer"
+          >
             <ScanLine color="#FFA532" size={20} />
           </div>
           <GasButton />

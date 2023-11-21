@@ -25,7 +25,6 @@ export const CountDown: NextPage = () => {
       );
 
       const formattedHours = h < 10 ? `0${h}` : h;
-      console.log(formattedHours);
       setHours(Number(formattedHours));
 
       const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
@@ -50,7 +49,7 @@ export const CountDown: NextPage = () => {
         </>
       ) : (
         <>
-          <div className=" flex felx-row w-full justify-start text-center items-end gap-x-4">
+          <div className=" flex felx-row w-full justify-start text-center items-end gap-x-3">
             <div>
               <span>days</span>
               <div className="flex flex-col items-center justify-center">
