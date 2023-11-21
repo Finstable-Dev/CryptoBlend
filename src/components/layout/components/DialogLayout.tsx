@@ -3,6 +3,7 @@
 import useDialog from "@/store/UIProvider/dialog.store";
 
 import { ClaimDialog } from "@/components/dialog/ClaimDialog";
+import { ClaimNFTDialog } from "@/components/dialog/ClaimNFTDialog";
 import { QrDialog } from "@/components/dialog/QrDialog";
 import { ScanQR } from "@/components/dialog/ScanQR";
 import { DialogViews } from "@/store/UIProvider/dialog.type";
@@ -15,6 +16,7 @@ function DialogUI() {
       {dialogView === DialogViews.CLAIM_DIALOG && <ClaimDialog />}
       {dialogView === DialogViews.QR_DIALOG && <QrDialog />}
       {dialogView === DialogViews.SCAN_QR && <ScanQR />}
+      {dialogView === DialogViews.CLAIM_NFT_DIALOG && <ClaimNFTDialog />}
     </Dialog>
   );
 }
