@@ -20,9 +20,14 @@ const InputBase = ({
   inputClassName,
   ...props
 }: InputBaseProps & InputProps) => (
-  <div className={cn("relative text-white focus-within:text-white", className)}>
+  <div
+    className={cn(
+      "relative text-white focus-within:text-black focus-within:border-tertiary focus-within:border-[1px]",
+      className
+    )}
+  >
     <span
-      className={`absolute inset-y-0 ${
+      className={`absolute text-black inset-y-0 ${
         iconPosition === "left" ? "left-0" : "right-2"
       } flex items-center pl-2 cursor-pointer`}
     >
@@ -38,11 +43,14 @@ const InputBase = ({
     <Input
       type="text"
       className={cn(
-        `text-foreground ${
+        `text-foreground text-white bg-[#3D3D3D] rounded-xl focus-within:border-tertiary focus-within:border-[1px]  ${
           icon2 && icon2Position === "left" ? "pl-8" : "pr-8"
         } ${icon && iconPosition === "left" ? "pl-8" : "pr-8"}`,
         inputClassName
       )}
+      style={{
+        boxShadow: "0px 0px 0px 0px rgba(255, 112, 0, 0.20)",
+      }}
       {...props}
     />
   </div>

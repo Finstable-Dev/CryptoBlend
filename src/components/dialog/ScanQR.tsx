@@ -6,7 +6,6 @@ import {
 import useDialog from "@/store/UIProvider/dialog.store";
 import { Copy } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import QRCode from "react-qr-code";
 import { useAccount } from "wagmi";
 import { Button } from "../ui/button";
@@ -15,7 +14,7 @@ import { toast } from "../ui/use-toast";
 export function ScanQR() {
   const { closeDialog } = useDialog();
   const { address } = useAccount();
-  const [shortAddress, setShortAddress] = useState<string>();
+  // const [shortAddress, setShortAddress] = useState<string>();
 
   const copyText = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -25,11 +24,11 @@ export function ScanQR() {
     });
   };
 
-  useEffect(() => {
-    if (address) {
-      setShortAddress(`${address.slice(0, 6)} ... ${address.slice(-4)}`);
-    }
-  }, [address]);
+  // useEffect(() => {
+  //   if (address) {
+  //     setShortAddress(`${address.slice(0, 6)} ... ${address.slice(-4)}`);
+  //   }
+  // }, [address]);
 
   const objValue = {
     address: "0xC0faa153aa9BA5B337DC4Ec2552e8A7E36899d15",

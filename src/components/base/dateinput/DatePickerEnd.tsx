@@ -1,9 +1,5 @@
 "use client";
 
-import { format } from "date-fns";
-import { Calendar as CalendarIcon } from "lucide-react";
-import * as React from "react";
-
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -12,6 +8,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { format } from "date-fns";
+import { CalendarDays } from "lucide-react";
+import * as React from "react";
 
 export function DatePickerEnd() {
   const [date, setDate] = React.useState<Date>();
@@ -22,11 +21,11 @@ export function DatePickerEnd() {
         <Button
           variant={"outline"}
           className={cn(
-            "w-[306px] justify-start text-left font-normal",
+            "w-full justify-start text-left font-normal rounded-xl border-[1px] border-[#BDBDBD] bg-[#3D3D3D] hover:bg-[#3D3D3D]",
             !date && "text-muted-foreground"
           )}
         >
-          <CalendarIcon className="mr-2 h-4 w-4" />
+          <CalendarDays color="white" className="mr-2 h-4 w-4" />
           {date ? format(date, "PPP") : <span>Pick a date</span>}
         </Button>
       </PopoverTrigger>

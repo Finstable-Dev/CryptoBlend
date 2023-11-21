@@ -5,37 +5,18 @@ import {
 } from "@/components/ui/dialog";
 import useDialog from "@/store/UIProvider/dialog.store";
 import { AlertCircle } from "lucide-react";
-import { useEffect, useState } from "react";
-import { useAccount } from "wagmi";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
 
-interface valueQR {
-  adress?: string;
-  id?: number;
-}
-
 export function ClaimNFTDialog() {
   const { closeDialog } = useDialog();
-  const { address } = useAccount();
-  const [shortAddress, setShortAddress] = useState<string>();
-  const copyText = (text: string) => {
-    navigator.clipboard.writeText(text);
+  const Claim = () => {
     toast({
       duration: 1000,
-      description: "Copy Success",
+      description: "Claim NFT Success",
     });
-  };
 
-  useEffect(() => {
-    if (address) {
-      setShortAddress(`${address.slice(0, 6)} ... ${address.slice(-4)}`);
-    }
-  }, [address]);
-
-  const objValue = {
-    address: "0xC0faa153aa9BA5B337DC4Ec2552e8A7E36899d15",
-    id: 1,
+    closeDialog();
   };
 
   return (
@@ -72,7 +53,7 @@ export function ClaimNFTDialog() {
         </Button>
         <Button
           onClick={() => {
-            closeDialog();
+            Claim();
           }}
           type="button"
           variant="ghost"

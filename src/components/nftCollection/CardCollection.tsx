@@ -12,10 +12,7 @@ interface MockArrayData {
   category: string;
 }
 
-const CardCollection: React.FC<{ data: MockArrayData[]; select: string }> = ({
-  data,
-  select,
-}) => {
+const CardCollection: React.FC<{ data: MockArrayData[] }> = ({ data }) => {
   const { openDialog, setDialogView } = useDialog();
 
   const onClickOpen = () => {

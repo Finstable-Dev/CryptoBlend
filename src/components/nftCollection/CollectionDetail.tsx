@@ -107,7 +107,7 @@ export const CollectionDetail = () => {
         On going Campaign
       </span>
 
-      <CardCollection select={select} data={mockArrayData} />
+      <CardCollection data={mockArrayData} />
     </div>
   );
 };
