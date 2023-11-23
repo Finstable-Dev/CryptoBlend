@@ -81,7 +81,7 @@ export const DetailCharacter = () => {
         <Progress
           color="white"
           value={progress}
-          className=" w-[250px] lg:w-[289px] h-[10px]"
+          className="w-[250px] lg:w-[289px] h-[10px]"
         />
         <h6 className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#FFA532] to-[#FF7000]">
           100%
