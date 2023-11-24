@@ -14,14 +14,14 @@ import {
   walletConnectWallet,
 } from "@rainbow-me/rainbowkit/wallets";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { arbitrum, mainnet, optimism, polygon } from "wagmi/chains";
+import { polygonMumbai } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 
 const { chains, publicClient } = configureChains(
-  [mainnet, polygon, optimism, arbitrum],
+  [polygonMumbai],
   [publicProvider()]
 );
-const projectId = "e7b8cffe1cec205cb8d5c1c933e07a9d" || "";
+const projectId = process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || "";
 
 const connectors = connectorsForWallets([
   // ...wallets,

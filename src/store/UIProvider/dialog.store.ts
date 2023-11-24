@@ -6,6 +6,7 @@ import { DialogViews, IDialog } from "./dialog.type";
 const initialState = {
   displayDialog: false,
   dialogView: DialogViews.CLAIM_DIALOG,
+  id: 0,
 };
 
 const useDialog = create(
@@ -20,6 +21,9 @@ const useDialog = create(
 
     setDialogView: (view: DialogViews) => {
       set({ dialogView: view });
+    },
+    setId: (id: number) => {
+      set({ id });
     },
   }))
 );

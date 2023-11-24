@@ -1,9 +1,12 @@
 "use client";
 
-import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 
-export const CountDown: NextPage = () => {
+interface Props {
+  dateTime: number;
+}
+
+export const CountDown = ({ dateTime }: Props) => {
   const [EndCampaign, setEndCampaign] = useState(false);
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
@@ -11,7 +14,7 @@ export const CountDown: NextPage = () => {
   const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
-    const target = new Date("12/31/2023 23:59:59");
+    const target = new Date(dateTime * 1000);
 
     const interval = setInterval(() => {
       const now = new Date();
@@ -39,7 +42,7 @@ export const CountDown: NextPage = () => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [dateTime]);
 
   return (
     <div className="">

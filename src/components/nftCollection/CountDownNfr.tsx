@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 
 interface CountDownNfrProps {
-  date: string;
+  date: number;
 }
 
 export const CountDownNfr: React.FC<CountDownNfrProps> = ({ date }) => {

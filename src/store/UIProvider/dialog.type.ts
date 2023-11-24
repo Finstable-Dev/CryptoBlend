@@ -9,7 +9,9 @@ export enum DialogViews {
 export interface IDialog {
   displayDialog: boolean;
   dialogView: DialogViews;
+  id: number;
   openDialog: () => void;
   closeDialog: () => void;
   setDialogView: (view: DialogViews) => void;
+  setId: (id: number) => void;
 }
