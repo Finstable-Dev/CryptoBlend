@@ -6,19 +6,33 @@ import {
 import useDialog from "@/store/UIProvider/dialog.store";
 import { DialogViews } from "@/store/UIProvider/dialog.type";
 import { Coffee, Gem } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CoffeeIcon } from "../svgIcon/Coffee";
 import { GemIcon } from "../svgIcon/Gem";
 import { Button } from "../ui/button";
+import { useContractWrite, useAccount } from "wagmi";
+import { addressList } from "@/constants/addressList";
+import { CryptoCoffMember__factory } from "@/typechain-types";
 
 export function ClaimDialog() {
   const [selectItem, setSelectItem] = useState<number>(0);
-  const { openDialog, setDialogView, closeDialog } = useDialog();
+  const { openDialog, setDialogView, closeDialog, id } = useDialog();
+  const { address } = useAccount();
+  const { write, isLoading } = useContractWrite({
+    address: addressList.CryptoCoffMember,
+    abi: CryptoCoffMember__factory.abi,
+    functionName: "upgradeMember",
+    args: [BigInt(id), address!],
+  });
 
   const onClickOpen = () => {
     setDialogView(DialogViews.QR_DIALOG);
     openDialog();
   };
+
+  useEffect(() => {
+    console.log("selectItem", selectItem);
+  }, [selectItem]);
 
   return (
     <DialogContent className="max-w-[350px] ssm:max-w-[480px] px-5 rounded-2xl">
@@ -100,11 +114,12 @@ export function ClaimDialog() {
           <h5 className=" text-white font-medium">Cancel</h5>
         </Button>
         <Button
-          disabled={selectItem === 0}
+          disabled={selectItem === 0 || isLoading}
           onClick={() => {
             if (selectItem === 1) {
               onClickOpen();
             } else {
+              write();
               closeDialog();
             }
           }}
@@ -116,7 +131,9 @@ export function ClaimDialog() {
             background: "linear-gradient(282.7deg, #FFA532 0%, #FF7000 72.62%)",
           }}
         >
-          <h5 className=" text-white font-medium">Confirm</h5>
+          <h5 className=" text-white font-medium">
+            {isLoading ? "Loading..." : "Confirm"}
+          </h5>
         </Button>
       </div>
     </DialogContent>

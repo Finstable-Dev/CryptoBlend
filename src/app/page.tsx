@@ -2,6 +2,7 @@ import Mouse from "@/components/animation/mouse";
 import { CountdownCampaign } from "@/components/nftCharacter/CountdownCampaign";
 import { DetailCharacter } from "@/components/nftCharacter/DetailCharacter";
 import { CollectionDetail } from "@/components/nftCollection/CollectionDetail";
+import dynamic from "next/dynamic";
 
 export default function Home() {
   return (
