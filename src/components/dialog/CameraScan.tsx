@@ -4,8 +4,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useEffect, useState } from "react";
-import { Button } from "../ui/button";
 import QrReader from "react-qr-reader";
+import { Button } from "../ui/button";
 
 export function CameraScan() {
   const [data, setData] = useState<string>("No result");
@@ -24,10 +24,10 @@ export function CameraScan() {
       <hr className="border-[#3D3D3D]"></hr>
       <QrReader
         onError={(error: unknown) => {
-          console.error(error);
+          console.error(error, "error");
         }}
         onScan={(result: any) => {
-          setData(result?.text);
+          setData(result);
         }}
         style={{ width: "100%" }}
       />
