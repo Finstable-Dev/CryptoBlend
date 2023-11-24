@@ -19,7 +19,6 @@ function DialogUI() {
       {dialogView === DialogViews.SCAN_QR && <ScanQR />}
       {dialogView === DialogViews.CLAIM_NFT_DIALOG && <ClaimNFTDialog />}
       {dialogView === DialogViews.CAMERA_SCAN && <CameraScan />}
-      CameraScan
     </Dialog>
   );
 }

@@ -4,11 +4,16 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useState } from "react";
-import { QrReader } from "react-qr-reader";
 import { Button } from "../ui/button";
 
 export function CameraScan() {
   const [data, setData] = useState<string>("No result");
+  function handleScan(data: string | null) {
+    setData(data || "No result");
+  }
+  function handleError(err: unknown) {
+    console.error(err);
+  }
   return (
     <DialogContent className="max-w-[350px] ssm:max-w-[480px] px-5 rounded-2xl">
       <DialogHeader>
@@ -17,18 +22,11 @@ export function CameraScan() {
         </DialogTitle>
       </DialogHeader>
       <hr className=" border-[#3D3D3D]"></hr>
-      <QrReader
-        onResult={(result: any, error: any) => {
-          if (result && result.text) {
-            setData(result.text);
-          }
-
-          if (error) {
-            console.info(error);
-          }
-        }}
-        constraints={{ facingMode: "user" }}
-      />
+      {/* <QrReader
+        style={{ width: "100%" }}
+        onError={(err) => handleError(err)}
+        onScan={(data) => handleScan(data)}
+      /> */}
       <hr className="  border-[#3D3D3D]"></hr>
 
       <Button

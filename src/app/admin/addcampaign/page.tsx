@@ -84,7 +84,7 @@ const Addcampaign = () => {
   };
 
   const imageInputs = [];
-  for (let i = 1; i <= 10; i++) {
+  for (let i = 1; i <= 9; i++) {
     imageInputs.push(
       binaryImageData.find((image) => image.pointer === i) ? (
         <Image
@@ -121,7 +121,7 @@ const Addcampaign = () => {
 
   return (
     <main className="flex   flex-col  h-full w-full items-center justify-center  bg-[rgba(0,0,0,0.75)] ">
-      <div className="max-w-[800px] w-full  flex flex-col  pt-32 px-3 lg:px-16 gap-10">
+      <div className="max-w-[1000px] w-full  flex flex-col  pt-32 px-3 lg:px-16 gap-10">
         <span>Add Campaign</span>
         <div>
           <span>Name Campaign</span>
@@ -135,7 +135,7 @@ const Addcampaign = () => {
           <span>Detail Campaign</span>
           <Textarea
             placeholder="detail"
-            className=" w-full rounded-xl border-[1px] border-[#BDBDBD]"
+            className="w-full rounded-xl border-[1px] border-[#BDBDBD]"
           />
         </div>
 
@@ -150,57 +150,59 @@ const Addcampaign = () => {
           </div>
         </div>
 
-        <div className="flex flex-col  pt-20 gap-6">
-          <h2 className=" font-medium">Upload image NFT</h2>
-          <div className=" flex flex-col lg:flex-row w-full gap-6 lg:gap-8">
-            {binaryImageData.find((image) => image.pointer === 10) ? (
-              <div className="flex flex-col gap-5 w-[350px] h-[400px] p-5 border-[1px] border-[#DCDCDC] rounded-xl bg-[#3D3D3D]">
-                <span>Upload image</span>
-                <Image
-                  src={
-                    binaryImageData.find((image) => image.pointer === 10)
-                      ?.imageSrc as string
-                  }
-                  alt={(10).toString()}
-                  width={200}
-                  height={200}
-                  className="w-[322px] h-[330px] rounded-lg"
-                />
-              </div>
-            ) : (
-              <div className="flex flex-col gap-5 w-[350px] h-[400px] p-5 border-[1px] border-[#DCDCDC] rounded-xl bg-[#3D3D3D]">
-                <span>Upload image</span>
-                <div className="flex items-center justify-center ">
-                  <label className="flex flex-col items-center bg-[#F6F6F6] justify-center w-full h-[310px] p-1 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer  ">
-                    <div className="flex flex-col items-center justify-center bg-[#F6F6F6]">
-                      <UploadImage />
-                    </div>
-                    <input
-                      id="dropzone-file"
-                      type="file"
-                      className="hidden"
-                      onChange={(e) => {
-                        handleImageChange(e, 10);
-                      }}
-                    />
-                  </label>
-                </div>
-              </div>
-            )}
-            <div className="flex flex-col gap-5 w-[350px] h-[400px] p-5 border-[1px] border-[#DCDCDC] rounded-xl bg-[#3D3D3D]">
+        <div className="flex flex-col gap-6">
+          <h2 className="font-medium">Upload image NFT</h2>
+          <div className="flex flex-col lg:flex-row w-full gap-4">
+            <div className="flex flex-col gap-5 mx-auto max-w-[350px] w-full p-5 border-[1px] border-[#DCDCDC] rounded-xl bg-[#3D3D3D]">
+              {binaryImageData.find((image) => image.pointer === 10) ? (
+                <>
+                  <span>Upload image</span>
+                  <Image
+                    src={
+                      binaryImageData.find((image) => image.pointer === 10)
+                        ?.imageSrc as string
+                    }
+                    alt={(10).toString()}
+                    width={400}
+                    height={400}
+                    className="w-full h-full rounded-lg"
+                  />
+                </>
+              ) : (
+                <>
+                  <span>Upload image</span>
+                  <div className="flex items-center justify-center h-full">
+                    <label className="flex flex-col items-center bg-[#F6F6F6] justify-center w-full min-h-[285px] h-full p-1 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer  ">
+                      <div className="flex flex-col items-center justify-center bg-[#F6F6F6]">
+                        <UploadImage />
+                      </div>
+                      <input
+                        id="dropzone-file"
+                        type="file"
+                        className="hidden"
+                        onChange={(e) => {
+                          handleImageChange(e, 10);
+                        }}
+                      />
+                    </label>
+                  </div>
+                </>
+              )}
+            </div>
+            <div className="flex flex-col gap-5 mx-auto max-w-[350px] w-full p-5 border-[1px] border-[#DCDCDC] rounded-xl bg-[#3D3D3D]">
               <span>Upload 9 image</span>
-              <div className="grid grid-cols-3 w-[300px] text-black gap-1">
+              <div className="grid grid-cols-3 w-full text-black gap-2">
                 {imageInputs}
               </div>
             </div>
           </div>
         </div>
-        <div className="w-full flex justify-center items-center pb-20">
+        <div className="w-full flex justify-center items-center mb-5">
           <Button
             onClick={upload}
             type="button"
             variant="ghost"
-            className="lg:border-[1px] border-[0px] p-3  font-semibold  w-[154px] h-[48px] mt-20"
+            className="lg:border-[1px] border-[0px] p-3 font-semibold "
             style={{
               borderRadius: "99px",
               background:
