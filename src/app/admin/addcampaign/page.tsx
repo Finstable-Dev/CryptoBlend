@@ -1,7 +1,6 @@
 "use client";
 
-import { DatePickerEnd } from "@/components/base/dateinput/DatePickerEnd";
-import { DatePickerStart } from "@/components/base/dateinput/DatePickerStart";
+import { DateTimePicker } from "@/components/base/dateTime/DateTimePicker";
 import InputBase from "@/components/base/input/inputbase";
 import { UploadImage } from "@/components/svgIcon/UploadImage";
 import { Button } from "@/components/ui/button";
@@ -19,6 +18,12 @@ interface IBinaryImageData {
 }
 const Addcampaign = () => {
   const { openDialog, setDialogView } = useDialog();
+  const [selectedStartDate, setSelectedStartDate] = useState<Date>(new Date());
+  const [selecteEndDate, setSelectedEndDate] = useState<Date>(new Date());
+
+  console.log(selectedStartDate);
+  console.log(selecteEndDate);
+
   const [binaryImageData, setBinaryImageData] = useState<
     Array<IBinaryImageData>
   >([]);
@@ -139,14 +144,20 @@ const Addcampaign = () => {
           />
         </div>
 
-        <div className=" flex flex-row justify-center items-center gap-5">
+        <div className=" flex flex-col lg:flex-row justify-center items-center gap-5">
           <div className="flex flex-col gap-1 w-full">
             <span>Start Campaign</span>
-            <DatePickerStart />
+            <DateTimePicker
+              date={selectedStartDate}
+              setDate={setSelectedStartDate}
+            />
           </div>
           <div className="flex flex-col gap-1 w-full">
             <span>End Campaign</span>
-            <DatePickerEnd />
+            <DateTimePicker
+              date={selecteEndDate}
+              setDate={setSelectedEndDate}
+            />
           </div>
         </div>
 
