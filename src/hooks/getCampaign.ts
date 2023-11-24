@@ -142,9 +142,15 @@ export function useGetTokenOfOwnerByCampaign(campaignId: number) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const promises = tokenUriList.map(async (url) => {
+        const promises = tokenUriList.map(async (url, index) => {
           const res = await readMetadataService.readMetadata(url as string);
-          return res.data;
+          return {
+            id: nftIdList[index],
+            name: res.data.name,
+            description: res.data.description,
+            image: res.data.image,
+            attributes: res.data.attributes,
+          };
         });
 
         const result = await Promise.all(promises);
@@ -156,7 +162,7 @@ export function useGetTokenOfOwnerByCampaign(campaignId: number) {
     };
 
     fetchData();
-  }, [tokenUriList]);
+  }, [tokenUriList, nftIdList]);
 
   const claimedToken = useMemo(() => {
     return allTokenData.filter((item) => {

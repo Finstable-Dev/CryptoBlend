@@ -59,6 +59,7 @@ export interface CryptoCoffPointInterface extends Interface {
     nameOrSignature:
       | "IsAchieveGoal"
       | "IsClaimed"
+      | "addPoint"
       | "approve"
       | "balanceOf"
       | "bytes32ToAddress"
@@ -73,9 +74,11 @@ export interface CryptoCoffPointInterface extends Interface {
       | "name"
       | "ownerOf"
       | "performUpkeep"
+      | "safeMint"
       | "safeTransferFrom(address,address,uint256)"
       | "safeTransferFrom(address,address,uint256,bytes)"
       | "setApprovalForAll"
+      | "setCampaignId"
       | "supportsInterface"
       | "symbol"
       | "tokenByIndex"
@@ -101,6 +104,10 @@ export interface CryptoCoffPointInterface extends Interface {
   encodeFunctionData(
     functionFragment: "IsClaimed",
     values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "addPoint",
+    values: [AddressLike, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "approve",
@@ -153,6 +160,10 @@ export interface CryptoCoffPointInterface extends Interface {
     values: [BytesLike]
   ): string;
   encodeFunctionData(
+    functionFragment: "safeMint",
+    values: [AddressLike, BigNumberish]
+  ): string;
+  encodeFunctionData(
     functionFragment: "safeTransferFrom(address,address,uint256)",
     values: [AddressLike, AddressLike, BigNumberish]
   ): string;
@@ -163,6 +174,10 @@ export interface CryptoCoffPointInterface extends Interface {
   encodeFunctionData(
     functionFragment: "setApprovalForAll",
     values: [AddressLike, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setCampaignId",
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "supportsInterface",
@@ -195,6 +210,7 @@ export interface CryptoCoffPointInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "IsClaimed", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "addPoint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(
@@ -230,6 +246,7 @@ export interface CryptoCoffPointInterface extends Interface {
     functionFragment: "performUpkeep",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "safeMint", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "safeTransferFrom(address,address,uint256)",
     data: BytesLike
@@ -240,6 +257,10 @@ export interface CryptoCoffPointInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setApprovalForAll",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setCampaignId",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -403,6 +424,12 @@ export interface CryptoCoffPoint extends BaseContract {
 
   IsClaimed: TypedContractMethod<[tokenId: BigNumberish], [boolean], "view">;
 
+  addPoint: TypedContractMethod<
+    [customerAddress: AddressLike, point: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
   approve: TypedContractMethod<
     [to: AddressLike, tokenId: BigNumberish],
     [void],
@@ -463,6 +490,12 @@ export interface CryptoCoffPoint extends BaseContract {
     "nonpayable"
   >;
 
+  safeMint: TypedContractMethod<
+    [to: AddressLike, point: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
   "safeTransferFrom(address,address,uint256)": TypedContractMethod<
     [from: AddressLike, to: AddressLike, tokenId: BigNumberish],
     [void],
@@ -482,6 +515,12 @@ export interface CryptoCoffPoint extends BaseContract {
 
   setApprovalForAll: TypedContractMethod<
     [operator: AddressLike, approved: boolean],
+    [void],
+    "nonpayable"
+  >;
+
+  setCampaignId: TypedContractMethod<
+    [_campaignId: BigNumberish],
     [void],
     "nonpayable"
   >;
@@ -522,6 +561,13 @@ export interface CryptoCoffPoint extends BaseContract {
   getFunction(
     nameOrSignature: "IsClaimed"
   ): TypedContractMethod<[tokenId: BigNumberish], [boolean], "view">;
+  getFunction(
+    nameOrSignature: "addPoint"
+  ): TypedContractMethod<
+    [customerAddress: AddressLike, point: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
   getFunction(
     nameOrSignature: "approve"
   ): TypedContractMethod<
@@ -581,6 +627,13 @@ export interface CryptoCoffPoint extends BaseContract {
     nameOrSignature: "performUpkeep"
   ): TypedContractMethod<[performData: BytesLike], [void], "nonpayable">;
   getFunction(
+    nameOrSignature: "safeMint"
+  ): TypedContractMethod<
+    [to: AddressLike, point: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
     nameOrSignature: "safeTransferFrom(address,address,uint256)"
   ): TypedContractMethod<
     [from: AddressLike, to: AddressLike, tokenId: BigNumberish],
@@ -606,6 +659,9 @@ export interface CryptoCoffPoint extends BaseContract {
     [void],
     "nonpayable"
   >;
+  getFunction(
+    nameOrSignature: "setCampaignId"
+  ): TypedContractMethod<[_campaignId: BigNumberish], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "supportsInterface"
   ): TypedContractMethod<[interfaceId: BytesLike], [boolean], "view">;

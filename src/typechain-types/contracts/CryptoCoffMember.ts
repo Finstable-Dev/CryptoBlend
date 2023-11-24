@@ -67,6 +67,7 @@ export interface CryptoCoffMemberInterface extends Interface {
       | "ownerOf"
       | "performUpkeep"
       | "point"
+      | "safeMint"
       | "safeTransferFrom(address,address,uint256)"
       | "safeTransferFrom(address,address,uint256,bytes)"
       | "setApprovalForAll"
@@ -77,6 +78,7 @@ export interface CryptoCoffMemberInterface extends Interface {
       | "tokenURI"
       | "totalSupply"
       | "transferFrom"
+      | "upgradeMember"
   ): FunctionFragment;
 
   getEvent(
@@ -123,6 +125,10 @@ export interface CryptoCoffMemberInterface extends Interface {
   ): string;
   encodeFunctionData(functionFragment: "point", values?: undefined): string;
   encodeFunctionData(
+    functionFragment: "safeMint",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
     functionFragment: "safeTransferFrom(address,address,uint256)",
     values: [AddressLike, AddressLike, BigNumberish]
   ): string;
@@ -159,6 +165,10 @@ export interface CryptoCoffMemberInterface extends Interface {
     functionFragment: "transferFrom",
     values: [AddressLike, AddressLike, BigNumberish]
   ): string;
+  encodeFunctionData(
+    functionFragment: "upgradeMember",
+    values: [BigNumberish, AddressLike]
+  ): string;
 
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
@@ -182,6 +192,7 @@ export interface CryptoCoffMemberInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "point", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "safeMint", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "safeTransferFrom(address,address,uint256)",
     data: BytesLike
@@ -214,6 +225,10 @@ export interface CryptoCoffMemberInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "transferFrom",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "upgradeMember",
     data: BytesLike
   ): Result;
 }
@@ -387,6 +402,8 @@ export interface CryptoCoffMember extends BaseContract {
 
   point: TypedContractMethod<[], [string], "view">;
 
+  safeMint: TypedContractMethod<[to: AddressLike], [void], "nonpayable">;
+
   "safeTransferFrom(address,address,uint256)": TypedContractMethod<
     [from: AddressLike, to: AddressLike, tokenId: BigNumberish],
     [void],
@@ -432,6 +449,12 @@ export interface CryptoCoffMember extends BaseContract {
 
   transferFrom: TypedContractMethod<
     [from: AddressLike, to: AddressLike, tokenId: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+
+  upgradeMember: TypedContractMethod<
+    [_pointTokenId: BigNumberish, customerAddress: AddressLike],
     [void],
     "nonpayable"
   >;
@@ -482,6 +505,9 @@ export interface CryptoCoffMember extends BaseContract {
   getFunction(
     nameOrSignature: "point"
   ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "safeMint"
+  ): TypedContractMethod<[to: AddressLike], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "safeTransferFrom(address,address,uint256)"
   ): TypedContractMethod<
@@ -534,6 +560,13 @@ export interface CryptoCoffMember extends BaseContract {
     nameOrSignature: "transferFrom"
   ): TypedContractMethod<
     [from: AddressLike, to: AddressLike, tokenId: BigNumberish],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "upgradeMember"
+  ): TypedContractMethod<
+    [_pointTokenId: BigNumberish, customerAddress: AddressLike],
     [void],
     "nonpayable"
   >;
