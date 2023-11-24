@@ -6,12 +6,13 @@ import Link from "next/link";
 import useDialog from "@/store/UIProvider/dialog.store";
 import { DialogViews } from "@/store/UIProvider/dialog.type";
 import { ScanLine } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { ConnectButtonCustom } from "./components/ConnectButton";
 import GasButton from "./components/GasButton";
 
 export default function Navbar() {
   const { openDialog, setDialogView } = useDialog();
-
+  const pathname = usePathname();
   const onClickOpen = () => {
     setDialogView(DialogViews.SCAN_QR);
     openDialog();
@@ -34,17 +35,34 @@ export default function Navbar() {
             alt="logo"
           />
         </Link>
-        <div className="flex flex-row items-center justify-center gap-5">
-          {/* <ModeToggle /> */}
-          <div
-            onClick={() => onClickOpen()}
-            className="flex flex-row items-center justify-center gap-2 border-[1px] border-[#FF7000] px-3 py-[10px] rounded-full bg-[#461804] cursor-pointer"
-          >
-            <ScanLine color="#FFA532" size={20} />
+        {pathname === "/" ? (
+          <div className="flex flex-row items-center justify-center gap-5">
+            {/* <ModeToggle /> */}
+            <div
+              onClick={() => onClickOpen()}
+              className="flex flex-row items-center justify-center gap-2 border-[1px] border-[#FF7000] px-3 py-[10px] rounded-full bg-[#461804] cursor-pointer"
+            >
+              <ScanLine color="#FFA532" size={20} />
+            </div>
+            <GasButton />
+            <ConnectButtonCustom />
           </div>
-          <GasButton />
-          <ConnectButtonCustom />
-        </div>
+        ) : (
+          <div className="flex flex-row items-center justify-center gap-5">
+            <Link href="/admin/claimNFT">
+              <h4 className=" font-medium text-quaternary">Claim NFT</h4>
+            </Link>
+            <Link href="/admin/addcampaign">
+              <h4 className=" font-medium text-quaternary">Add Campaign</h4>
+            </Link>
+
+            <Link href="/admin/campaignlist">
+              <h4 className=" font-medium text-quaternary">Campaign List</h4>
+            </Link>
+
+            <ConnectButtonCustom />
+          </div>
+        )}
       </div>
     </>
   );

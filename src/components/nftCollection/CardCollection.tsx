@@ -1,11 +1,11 @@
+import { useGetTokenOfOwnerByCampaign } from "@/hooks/getCampaign";
+import { IDetailCampaign } from "@/interfaces/campaign.interface";
+import readMetadataService from "@/services/readMetadata.service";
 import useDialog from "@/store/UIProvider/dialog.store";
 import { DialogViews } from "@/store/UIProvider/dialog.type";
 import Image from "next/image";
-import { CountDownNfr } from "./CountDownNfr";
-import { IDetailCampaign } from "@/interfaces/campaign.interface";
-import { useGetTokenOfOwnerByCampaign } from "@/hooks/getCampaign";
 import { useEffect, useState } from "react";
-import readMetadataService from "@/services/readMetadata.service";
+import { CountDownNfr } from "./CountDownNfr";
 
 const CardCollection: React.FC<{
   detail: IDetailCampaign | null;

@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import CardCollection from "./CardCollection";
 import { useGetCampaignInfoByPeriod } from "@/hooks/getCampaign";
 import { IDetailCampaign } from "@/interfaces/campaign.interface";
+import { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import CardCollection from "./CardCollection";
 
 export const CollectionDetail = () => {
   const category = [
