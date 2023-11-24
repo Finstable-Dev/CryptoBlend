@@ -3,17 +3,17 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
+import QrReader from "react-qr-reader";
 
 export function CameraScan() {
   const [data, setData] = useState<string>("No result");
-  function handleScan(data: string | null) {
-    setData(data || "No result");
-  }
-  function handleError(err: unknown) {
-    console.error(err);
-  }
+
+  useEffect(() => {
+    console.log("data", data);
+  }, [data]);
+
   return (
     <DialogContent className="max-w-[350px] ssm:max-w-[480px] px-5 rounded-2xl">
       <DialogHeader>
@@ -21,12 +21,17 @@ export function CameraScan() {
           Scan QR Code
         </DialogTitle>
       </DialogHeader>
-      <hr className=" border-[#3D3D3D]"></hr>
-      {/* <QrReader
+      <hr className="border-[#3D3D3D]"></hr>
+      <QrReader
+        onError={(error: unknown) => {
+          console.error(error);
+        }}
+        onScan={(result: any) => {
+          setData(result?.text);
+        }}
         style={{ width: "100%" }}
-        onError={(err) => handleError(err)}
-        onScan={(data) => handleScan(data)}
-      /> */}
+      />
+      <p>{data}</p>
       <hr className="  border-[#3D3D3D]"></hr>
 
       <Button
