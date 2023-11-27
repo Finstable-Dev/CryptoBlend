@@ -50,14 +50,20 @@ export default function Navbar() {
         ) : (
           <div className="flex flex-row items-center justify-center gap-5">
             <Link href="/admin/claimNFT">
-              <h4 className=" font-medium text-quaternary">Claim NFT</h4>
+              <h4 className=" font-extralight lg:font-medium text-quaternary">
+                Claim NFT
+              </h4>
             </Link>
             <Link href="/admin/addcampaign">
-              <h4 className=" font-medium text-quaternary">Add Campaign</h4>
+              <h4 className=" font-extralight lg:font-medium text-quaternary">
+                Add Campaign
+              </h4>
             </Link>
 
             <Link href="/admin/campaignlist">
-              <h4 className=" font-medium text-quaternary">Campaign List</h4>
+              <h4 className=" font-extralight lg:font-medium text-quaternary">
+                Campaign List
+              </h4>
             </Link>
 
             <ConnectButtonCustom />

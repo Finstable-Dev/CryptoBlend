@@ -1,7 +1,6 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { AlertTriangleIcon, User2, Wallet } from "lucide-react";
+import { AlertTriangleIcon, Wallet } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 
 import { Button } from "../../ui/button";
 
@@ -73,10 +72,16 @@ export const ConnectButtonCustom = () => {
               }
               return (
                 <div className="flex flex-row">
-                  <div className="rounded-lg border-[1px] items-center lg:flex hidden">
+                  <div
+                    className="rounded-lg border-[1px] items-center lg:flex hidden"
+                    style={{
+                      background:
+                        "linear-gradient(282.7deg, #FFA532 0%, #FF7000 72.62%)",
+                    }}
+                  >
                     <Button
                       variant="ghost"
-                      className="rounded-r-none font-semibold"
+                      className="rounded-r-none font-semibold hover:border-y-2 hover:border-l-2 hover:border-white hover:bg-transparent "
                       onClick={openChainModal}
                     >
                       {chain.hasIcon && (
@@ -103,10 +108,10 @@ export const ConnectButtonCustom = () => {
                       )}
                       {chain.name}
                     </Button>
-                    <div className="bg-black/10 h-6 w-[1px]" />
+                    <div className="bg-white h-6 w-[1px]" />
                     <Button
                       variant="ghost"
-                      className="rounded-l-none font-semibold"
+                      className="rounded-l-none font-semibold hover:border-y-2 hover:border-r-2 hover:border-white hover:bg-transparent "
                       onClick={openAccountModal}
                     >
                       <div className="grid grid-cols-3 items-center gap-2">
@@ -116,18 +121,12 @@ export const ConnectButtonCustom = () => {
                             : ""}
                         </p>
 
-                        <div className="rounded-lg bg-black/10 px-2 py-1 col-span-2">
+                        <div className="rounded-lg bg-black/10 px-2 py-1 col-span-2 ">
                           {account.displayName}
                         </div>
                       </div>
                     </Button>
                   </div>
-
-                  <Link href="/account">
-                    <div className="hidden lg:flex justify-center items-center border-[1px] p-[10px] rounded-lg mx-2">
-                      <User2 size="20" />
-                    </div>
-                  </Link>
 
                   <div className="lg:hidden flex items-center gap-1">
                     <Button

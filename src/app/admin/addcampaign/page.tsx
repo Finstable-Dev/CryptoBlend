@@ -127,40 +127,37 @@ const Addcampaign = () => {
   return (
     <main className="flex   flex-col  h-full w-full items-center justify-center  bg-[rgba(0,0,0,0.75)] ">
       <div className="max-w-[1000px] w-full  flex flex-col  pt-32 px-3 lg:px-16 gap-10">
-        <span>Add Campaign</span>
+        <span className=" text-[32px] font-semibold">Add Campaign</span>
         <div>
-          <span>Name Campaign</span>
+          <h2 className="font-medium">Name Campaign</h2>
           <InputBase
             placeholder="Name"
             className=" w-full rounded-xl border-[1px] border-[#BDBDBD]"
           />
         </div>
-
         <div>
-          <span>Detail Campaign</span>
+          <h2 className="font-medium">Detail Campaign</h2>
           <Textarea
             placeholder="detail"
             className="w-full rounded-xl border-[1px] border-[#BDBDBD]"
           />
         </div>
-
         <div className=" flex flex-col lg:flex-row justify-center items-center gap-5">
           <div className="flex flex-col gap-1 w-full">
-            <span>Start Campaign</span>
+            <h2 className="font-medium">Start Campaign</h2>
             <DateTimePicker
               date={selectedStartDate}
               setDate={setSelectedStartDate}
             />
           </div>
           <div className="flex flex-col gap-1 w-full">
-            <span>End Campaign</span>
+            <h2 className="font-medium">End Campaign</h2>
             <DateTimePicker
               date={selecteEndDate}
               setDate={setSelectedEndDate}
             />
           </div>
         </div>
-
         <div className="flex flex-col gap-6">
           <h2 className="font-medium">Upload image NFT</h2>
           <div className="flex flex-col lg:flex-row w-full gap-4">
