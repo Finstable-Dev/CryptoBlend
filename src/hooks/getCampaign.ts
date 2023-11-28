@@ -73,31 +73,24 @@ export function useGetMultipleCampaignInfo(id: number[]) {
 }
 
 export function useGetCampaignInfoByPeriod(period: string) {
-  const { campaigns: campaignIdList } = useGetAllCampaigns();
+  const { data } = useContractRead({
+    address: addressList.Campaign,
+    abi: Campaign__factory.abi,
+    functionName: "getCampaignByPeriod",
+    args: [period],
+  });
+
+  const campaignIdList = useMemo(() => {
+    if (!data) return [];
+    return data.map((d: BigInt) => Number(d));
+  }, [data]);
+
   const { campaign } = useGetMultipleCampaignInfo(campaignIdList);
 
-  const data = useMemo(() => {
-    if (period === "running") {
-      return campaign?.filter(
-        (item) =>
-          new Date(Number(item?.timeStart) * 1000) <= new Date() &&
-          new Date(Number(item?.timeEnd) * 1000) >= new Date()
-      );
-    } else if (period === "past") {
-      return campaign?.filter(
-        (item) => new Date(Number(item?.timeEnd) * 1000) < new Date()
-      );
-    } else {
-      return campaign?.filter(
-        (item) => new Date(Number(item?.timeStart) * 1000) > new Date()
-      );
-    }
-  }, [campaign, period]);
-
   const result = useMemo(() => {
-    if (!data) return [];
-    return data;
-  }, [data]);
+    if (!campaign) return [];
+    return campaign;
+  }, [campaign]);
 
   return { result };
 }

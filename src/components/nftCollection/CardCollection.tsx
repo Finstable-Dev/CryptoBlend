@@ -23,6 +23,7 @@ const CardCollection: React.FC<{
   );
 
   useEffect(() => {
+    if (!detail?.baseURI) return;
     const url = `${detail?.baseURI}/9point.json`;
     const fetchData = async () => {
       const res = await readMetadataService.readMetadata(url);
@@ -37,7 +38,7 @@ const CardCollection: React.FC<{
         <div className="flex flex-row sm:flex-col  gap-2 h-full">
           <Image
             className="cursor-pointer w-[170px] h-[170px] rounded-[16px] border-[5px] border-[#FFA532]"
-            src={fullImageSrc}
+            src={fullImageSrc || "/Caffeine.png"}
             width={170}
             height={170}
             alt="logo"

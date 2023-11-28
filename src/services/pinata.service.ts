@@ -17,7 +17,7 @@ const NFTStorageUploadFolder = async (imageBaseUrl: string) => {
               description: `${
                 i === 10 ? "You have claimed this NFT" : `You have ${i} point`
               }`,
-              image: `${imageBaseUrl}${i === 10 ? "" : `${i}point`}.png`,
+              image: `${imageBaseUrl}${i === 10 ? "claimed" : `${i}point`}.png`,
               attributes: [
                 {
                   "trait-type": "Point",
@@ -35,6 +35,7 @@ const NFTStorageUploadFolder = async (imageBaseUrl: string) => {
   }
   const cid = await client.storeDirectory(files);
   console.log("Metadata CID:", cid);
+  return cid;
 };
 
 const PinataService = {

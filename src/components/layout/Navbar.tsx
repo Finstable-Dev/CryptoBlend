@@ -56,7 +56,7 @@ export default function Navbar() {
               <h4 className=" font-medium text-quaternary">Add Campaign</h4>
             </Link>
 
-            <Link href="/admin/campaignlist">
+            <Link href="/admin">
               <h4 className=" font-medium text-quaternary">Campaign List</h4>
             </Link>
 

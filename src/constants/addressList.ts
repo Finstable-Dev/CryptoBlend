@@ -5,8 +5,8 @@ interface IAddressList {
   Campaign: `0x${string}`;
 }
 export const addressList: IAddressList = {
-  CryptoCoffPoint: "0x183e5F3aBC43Db98AC10E7f545618EB062235804",
-  CryptoCoffMember: "0xd249f357d45eE65eBc6Cb8FE348057b6CC7c5242",
-  MemberEmitLog: "0xdee2E3e9aA29a3F81B63e842409Df2A69BC4038F",
-  Campaign: "0xB694d82ccc5F47426F1F6f305eb38491dEec5653",
+  CryptoCoffPoint: "0x7117ab7020fa19C3ec34Af80D025717617F1d883",
+  CryptoCoffMember: "0xBa510b462be31f3527Cd9EA26590E4F3a0DBC02b",
+  MemberEmitLog: "0x3e466b3d61Ed5B9c795B228a45699a41842f88A6",
+  Campaign: "0x083DEd2BcA0082085487d5D57eE894A05aF4cF8D",
 };

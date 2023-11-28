@@ -14,6 +14,7 @@ export const CountdownCampaign = () => {
   }, []);
 
   useEffect(() => {
+    if (campaignInfo.length === 0) return;
     const url = `${campaignInfo[0]?.baseURI}/9point.json`;
     const fetchData = async () => {
       const res = await readMetadataService.readMetadata(url);
@@ -32,10 +33,8 @@ export const CountdownCampaign = () => {
       <div className=" mlg:hidden absolute left-[-100px] top-[-150px] rounded-[262px] w-[262px] h-[262px] bg-[#FF7000] opacity-[.2] blur-[50px] z-20" />
       <div className=" mlg:hidden absolute right-[-100px] bottom-[-100px] rounded-[300px] w-[300px] h-[300px] bg-[#FF7000] opacity-[.4] blur-[100px] z-20" />
       <Image
-        className={`cursor-pointer w-[365px]  lg:w-[365px] h-[300px] lg:h-[365px] z-30 ${
-          fullImageSrc ? "" : "hidden"
-        }`}
-        src={fullImageSrc || "/coffeecub.png"}
+        className={`cursor-pointer w-[365px]  lg:w-[365px] h-[300px] lg:h-[365px] z-30`}
+        src={campaignInfo.length === 0 ? "/coffeecub.png" : fullImageSrc}
         width={365}
         height={365}
         alt="logo"
@@ -43,7 +42,11 @@ export const CountdownCampaign = () => {
       <div className=" flex relative flex-col flex-1 lg:h-[365px] gap-y-5">
         <div className="grid gap-1">
           <span className="text-[32px] font-semibold">
-            {isClient ? campaignInfo[0]?.name : "Loading..."}
+            {isClient
+              ? campaignInfo.length === 0
+                ? "The campaing will run comming soon..."
+                : campaignInfo[0]?.name
+              : "Loading..."}
           </span>
           <span className="text-[16px]">
             {isClient ? campaignInfo[0]?.description : "Loading..."}
@@ -52,10 +55,12 @@ export const CountdownCampaign = () => {
         <div className="flex w-[80px] justify-center items-center  rounded-full bg-[#461804] border-[1px] border-tertiary">
           <h4 className=" text-white font-semibold px-[6px] py-1">9 Piece</h4>
         </div>
-        <div className="lg:absolute bottom-0 w-full grid gap-5">
-          <h3>END CAMPAIGN</h3>
-          <CountDown dateTime={Number(campaignInfo[0]?.timeEnd)} />
-        </div>
+        {isClient && campaignInfo.length !== 0 && (
+          <div className="lg:absolute bottom-0 w-full grid gap-5">
+            <h3>END CAMPAIGN</h3>
+            <CountDown dateTime={Number(campaignInfo[0]?.timeEnd)} />
+          </div>
+        )}
       </div>
     </div>
   );
