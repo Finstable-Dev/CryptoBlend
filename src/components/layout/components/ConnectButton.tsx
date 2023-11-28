@@ -72,16 +72,10 @@ export const ConnectButtonCustom = () => {
               }
               return (
                 <div className="flex flex-row">
-                  <div
-                    className="rounded-lg border-[1px] items-center lg:flex hidden"
-                    style={{
-                      background:
-                        "linear-gradient(282.7deg, #FFA532 0%, #FF7000 72.62%)",
-                    }}
-                  >
+                  <div className="rounded-lg border-[1px] items-center lg:flex hidden">
                     <Button
                       variant="ghost"
-                      className="rounded-r-none font-semibold hover:border-y-2 hover:border-l-2 hover:border-white hover:bg-transparent "
+                      className="rounded-r-none font-semibold"
                       onClick={openChainModal}
                     >
                       {chain.hasIcon && (
@@ -108,10 +102,10 @@ export const ConnectButtonCustom = () => {
                       )}
                       {chain.name}
                     </Button>
-                    <div className="bg-white h-6 w-[1px]" />
+                    <div className="bg-black/10 h-6 w-[1px]" />
                     <Button
                       variant="ghost"
-                      className="rounded-l-none font-semibold hover:border-y-2 hover:border-r-2 hover:border-white hover:bg-transparent "
+                      className="rounded-l-none font-semibold"
                       onClick={openAccountModal}
                     >
                       <div className="grid grid-cols-3 items-center gap-2">
@@ -121,7 +115,7 @@ export const ConnectButtonCustom = () => {
                             : ""}
                         </p>
 
-                        <div className="rounded-lg bg-black/10 px-2 py-1 col-span-2 ">
+                        <div className="rounded-lg bg-black/10 px-2 py-1 col-span-2">
                           {account.displayName}
                         </div>
                       </div>
