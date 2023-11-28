@@ -60,10 +60,8 @@ export default function Navbar() {
               </h4>
             </Link>
 
-            <Link href="/admin/campaignlist">
-              <h4 className=" font-extralight lg:font-medium text-quaternary">
-                Campaign List
-              </h4>
+            <Link href="/admin">
+              <h4 className=" font-medium text-quaternary">Campaign List</h4>
             </Link>
 
             <ConnectButtonCustom />
