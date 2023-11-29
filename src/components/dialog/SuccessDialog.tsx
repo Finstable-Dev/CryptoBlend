@@ -13,8 +13,7 @@ export function SuccessDialog() {
     <DialogContent className="max-w-[350px] ssm:max-w-[380px] px-5 rounded-2xl">
       {dialogState === DialogStates.LOADING && (
         <div className="flex flex-col justify-center items-center p-8 gap-5">
-          <Loader2 size={80} className="animate-spin" />
-          <h1>Loading...</h1>
+          <span className="loader"></span>
         </div>
       )}
       {dialogState === DialogStates.ERROR && (
