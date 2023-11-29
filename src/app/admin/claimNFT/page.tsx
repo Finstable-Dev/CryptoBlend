@@ -5,6 +5,7 @@ import useDialog from "@/store/UIProvider/dialog.store";
 import { DialogViews } from "@/store/UIProvider/dialog.type";
 import { ScanLine, ScanSearch, Search } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { useEnsAddress } from "wagmi";
 
@@ -23,7 +24,19 @@ const ClaimNFT = () => {
 
   return (
     <main className="flex  h-[100dvh] w-full   flex-col bg-[rgba(0,0,0,0.75)] ">
-      <div className=" w-full  flex  pt-32 px-3 lg:px-16">
+      <div className=" w-full  flex flex-col  pt-32 px-3 lg:px-16 gap-26">
+        <div className="pb-12 flex flex-row items-center gap-1">
+          <Link href="/admin">
+            <h6 className=" cursor-pointer  text-transparent bg-clip-text bg-gradient-to-r from-[#FFA532] to-[#FF7000]">
+              Admin
+            </h6>
+          </Link>
+          <h6 className="text-transparent bg-clip-text bg-gradient-to-r from-[#FFA532] to-[#FF7000]">
+            {" "}
+            /{" "}
+          </h6>
+          <h6>Claim NFT</h6>
+        </div>
         <InputBase
           placeholder="Search Address"
           icon={<ScanLine color="white" size={20} />}

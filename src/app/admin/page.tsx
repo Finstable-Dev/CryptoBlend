@@ -1,165 +1,64 @@
 "use client";
 
-import CampaignListItems from "@/components/nftCharacter/CampaignListItems";
-import CardCollection from "@/components/nftCollection/CardCollection";
-import { Button } from "@/components/ui/button";
-import { useGetCampaignInfoByPeriod } from "@/hooks/getCampaign";
-import { IDetailCampaign } from "@/interfaces/campaign.interface";
-import useDialog from "@/store/UIProvider/dialog.store";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import InputBase from "@/components/base/input/inputbase";
+import { CoffeeIcon } from "@/components/svgIcon/Coffee";
 
-const CampaignList = () => {
+import { Button } from "@/components/ui/button";
+import useDialog from "@/store/UIProvider/dialog.store";
+import { DialogViews } from "@/store/UIProvider/dialog.type";
+import {
+  ArrowDownSquare,
+  CopyPlus,
+  ScanLine,
+  ScanSearch,
+  Search,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { useEnsAddress } from "wagmi";
+
+const ClaimNFT = () => {
   const { openDialog, setDialogView } = useDialog();
 
-  const { result: runningCampaign } = useGetCampaignInfoByPeriod("running");
-  const { result: endedCampaign } = useGetCampaignInfoByPeriod("past");
-  const { result: upcommingCampaign } = useGetCampaignInfoByPeriod("upcoming");
-  const [isClient, setIsClient] = useState(false);
+  const [search, setSearch] = useState<string>("");
+  const onClickOpen = () => {
+    setDialogView(DialogViews.CLAIM_NFT_DIALOG);
+    openDialog();
+  };
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
   return (
-    <main className="flex  h-full w-full   flex-col bg-[hsla(0,0%,0%,1)] ">
-      <div className=" w-full  flex flex-col  py-32 px-3 lg:px-16 gap-4">
-        <span className=" text-[32px] font-semibold">Campaign List</span>
-        {/* On going Campaign  */}
-        {isClient && runningCampaign?.length > 0 ? (
-          <div>
-            <p className="py-10 text-[32px] font-semibold ">
-              On going Campaign
-            </p>
-            <div className="flex flex-row w-full overflow-scroll gap-5">
-              {runningCampaign?.map((item, index) => (
-                <CampaignListItems
-                  key={index}
-                  detail={item as IDetailCampaign}
-                />
-              ))}
-            </div>
+    <main className="flex   w-full   flex-col bg-[rgba(0,0,0,0.75)] ">
+      <div className=" w-full h-[100dvh]  flex flex-col justify-center items-center px-3 lg:px-16 gap-16">
+        <span className=" text-[32px] font-semibold">Claim NFT</span>
+        <div className=" w-full  flex flex-col sm:flex-row justify-center items-center text-center  gap-5">
+          <div className="flex flex-col   w-[305px]  cursor-pointer  h-[250px] justify-center items-center  bg-[#3D3D3D] rounded-xl transition ease-in-out delay-150 hover:translate-1 duration-300 hover:border-[3px] hover:border-[#FFA532] hover:shadow-[1px_1px_50px_-25px_rgba(255,122,0,0.9)] ">
+            <Link
+              href="/admin/claimNFT"
+              className="w-full h-full flex flex-col gap-7 justify-center items-center text-center  py-[22px] px-[32px]"
+            >
+              <ArrowDownSquare strokeWidth={1} size={120} />
+              <h1 className="flex justify-center items-center font-medium">
+                Claim NFT
+              </h1>
+            </Link>
           </div>
-        ) : (
-          <p className="grid place-items-center min-h-[500px]">
-            No campaign found
-          </p>
-        )}
 
-        {isClient && endedCampaign?.length > 0 ? (
-          <>
-            <p className="pt-10 pb-10 text-[32px] font-semibold ">
-              Ended Campaign
-            </p>
-            <div className="flex flex-row w-full overflow-scroll  gap-5">
-              {endedCampaign?.map((item, index) => (
-                <CampaignListItems
-                  key={index}
-                  detail={item as IDetailCampaign}
-                />
-              ))}
-            </div>
-          </>
-        ) : (
-          <p className="grid place-items-center min-h-[500px]">
-            No campaign found
-          </p>
-        )}
-
-        {isClient && upcommingCampaign?.length > 0 ? (
-          <>
-            <p className="pt-10 pb-10 text-[32px] font-semibold ">
-              Upcoming Campaign
-            </p>
-            <div className="flex flex-row w-full overflow-scroll  gap-10">
-              {upcommingCampaign?.map((item, index) => (
-                <CampaignListItems
-                  key={index}
-                  detail={item as IDetailCampaign}
-                />
-              ))}
-            </div>
-          </>
-        ) : (
-          <p className="grid place-items-center min-h-[500px]">
-            No campaign found
-          </p>
-        )}
-        {/* <span className="pt-10 pb-10 text-[32px] font-semibold ">
-          On going Campaign
-        </span>
-        <div className="flex flex-col justify-center items-start">
-          <div className=" flex flex-row  overflow-x-scroll overflow-y-scroll no-scrollbar">
-            <div className="transition ease-in-out delay-150 hover:translate-y-1 duration-300 flex flex-col bg-[#292929] min-w-[299px]  sm:min-w-[398px] h-full  p-6 mb-2 rounded-[16px] border-[#454545] border-[1px] gap-4 hover:border-[1px] hover:border-[#FFA532] hover:shadow-[1px_1px_50px_-25px_rgba(255,122,0,0.9)] ">
-              <div className=" flex justify-center items-center ">
-                <Image
-                  className="cursor-pointer w-[270px] sm:w-[350px] h-[220px] sm:h-[351px] rounded-[16px] border-[5px] border-quaternary "
-                  src="/Caffeine.png"
-                  width={302}
-                  height={301}
-                  alt="logo"
-                />
-              </div>
-              <span className=" text-2xl font-semibold">CaffeineCraft</span>
-            </div>
+          <div className="flex flex-col   w-[305px]  cursor-pointer  h-[250px] justify-center items-center  bg-[#3D3D3D] rounded-xl transition ease-in-out delay-150 hover:translate-1 duration-300 hover:border-[3px] hover:border-[#FFA532] hover:shadow-[1px_1px_50px_-25px_rgba(255,122,0,0.9)] ">
+            <Link
+              href="/admin/addpoint"
+              className="w-full h-full flex flex-col gap-7 justify-center items-center text-center  py-[22px] px-[32px]"
+            >
+              <CopyPlus strokeWidth={1} size={120} />
+              <h1 className="flex justify-center items-center font-medium">
+                Add point
+              </h1>
+            </Link>
           </div>
-        </div> */}
-        {/* Upcomming Campaign */}
-        {/* <span className="pt-10 pb-10 text-[32px] font-semibold ">
-          Upcomming Campaign
-        </span>
-        <div className="flex flex-col justify-center items-start">
-          <div className=" flex flex-row  overflow-x-scroll overflow-y-scroll no-scrollbar">
-            <div className="transition ease-in-out delay-150 hover:translate-y-1 duration-300 flex flex-col bg-[#292929] min-w-[299px]  sm:min-w-[398px] h-full  p-6 mb-2 rounded-[16px] border-[#454545] border-[1px] gap-4 hover:border-[1px] hover:border-[#FFA532] hover:shadow-[1px_1px_50px_-25px_rgba(255,122,0,0.9)] ">
-              <div className=" flex justify-center items-center ">
-                <Image
-                  className="cursor-pointer w-[270px] sm:w-[350px] h-[220px] sm:h-[351px] rounded-[16px] border-[5px] border-quaternary "
-                  src="/coffeecub.png"
-                  width={302}
-                  height={301}
-                  alt="logo"
-                />
-              </div>
-              <span className=" text-2xl font-semibold">CaffeineCraft</span>
-            </div>
-          </div>
-        </div> */}
-        {/*  Ended  Campaign */}
-        {/* <span className="pt-10 pb-10 text-[32px] font-semibold ">
-          Ended Campaign
-        </span>
-        <div className="flex flex-col justify-center items-start">
-          <div className=" flex flex-row  overflow-x-scroll overflow-y-scroll no-scrollbar">
-            <div className="transition ease-in-out delay-150 hover:translate-y-1 duration-300 flex flex-col bg-[#292929] min-w-[299px]  sm:min-w-[398px] h-full  p-6 mb-2 rounded-[16px] border-[#454545] border-[1px] gap-4 hover:border-[1px] hover:border-[#FFA532] hover:shadow-[1px_1px_50px_-25px_rgba(255,122,0,0.9)] ">
-              <div className=" flex justify-center items-center ">
-                <Image
-                  className="cursor-pointer w-[270px] sm:w-[350px] h-[220px] sm:h-[351px] rounded-[16px] border-[5px] border-quaternary "
-                  src="/claim.png"
-                  width={302}
-                  height={301}
-                  alt="logo"
-                />
-              </div>
-              <span className=" text-2xl font-semibold">CaffeineCraft</span>
-            </div>
-          </div>
-        </div> */}
-        {/* <div className="w-full flex justify-center items-center pb-20">
-          <Button
-            type="button"
-            variant="ghost"
-            className="lg:border-[1px] border-[0px] p-3  font-semibold  w-[154px] h-[48px] mt-20"
-            style={{
-              borderRadius: "99px",
-              background:
-                "linear-gradient(282.7deg, #FFA532 0%, #FF7000 72.62%)",
-            }}
-          >
-            <h5 className=" text-white font-medium">See more</h5>
-          </Button>
-        </div> */}
+        </div>
       </div>
     </main>
   );
 };
 
-export default CampaignList;
+export default ClaimNFT;

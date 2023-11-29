@@ -10,8 +10,7 @@ export function ScanQR() {
   return (
     <DialogContent className="max-w-[350px] ssm:max-w-[380px] px-5 rounded-2xl">
       <div className="flex flex-col justify-center items-center p-8 gap-5">
-        <Loader2 size={80} className="animate-spin" />
-        <h1>Loadding...</h1>
+        <span className="loader"></span>
       </div>
       <div className="flex flex-col gap-5 justify-center text-center w-full p-5">
         <div className="flex flex-col gap-5 justify-center items-center">
