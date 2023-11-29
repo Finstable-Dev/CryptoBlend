@@ -3,12 +3,14 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import useDialog from "@/store/UIProvider/dialog.store";
 import { useEffect, useState } from "react";
 import QrReader from "react-qr-reader";
 import { Button } from "../ui/button";
 
 export function CameraScan() {
   const [data, setData] = useState<string>("No result");
+  const { closeDialog } = useDialog();
 
   useEffect(() => {
     console.log("data", data);
@@ -35,6 +37,9 @@ export function CameraScan() {
       <hr className="  border-[#3D3D3D]"></hr>
 
       <Button
+        onClick={() => {
+          closeDialog();
+        }}
         type="button"
         variant="ghost"
         className="lg:border-[1px] border-[0px] px-3 font-semibold h-[48px]  w-full "

@@ -6,14 +6,21 @@ import { DialogViews } from "@/store/UIProvider/dialog.type";
 import { ScanLine, ScanSearch, Search } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import { useEnsAddress } from "wagmi";
 
 const ClaimNFT = () => {
   const { openDialog, setDialogView } = useDialog();
+  const [itemsSearch, setItemsSearch] = useState();
   const [search, setSearch] = useState<string>("");
   const onClickOpen = () => {
     setDialogView(DialogViews.CLAIM_NFT_DIALOG);
     openDialog();
   };
+
+  const { data, isError, isLoading }: any = useEnsAddress({
+    name: search,
+  });
+
   return (
     <main className="flex  h-[100dvh] w-full   flex-col bg-[rgba(0,0,0,0.75)] ">
       <div className=" w-full  flex  pt-32 px-3 lg:px-16">
@@ -28,6 +35,7 @@ const ClaimNFT = () => {
           className=" w-full  rounded-xl "
         />
       </div>
+      {/* itemsSearch ? */}
       {search === "0xC0faa153aa9BA5B337DC4Ec2552e8A7E36899d15" ? (
         <div className="flex flex-col justify-center items-center h-[100%]">
           <div className=" flex flex-row  overflow-x-scroll overflow-y-scroll no-scrollbar">
