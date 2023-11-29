@@ -1,18 +1,90 @@
 "use client";
 
+import CampaignListItems from "@/components/nftCharacter/CampaignListItems";
+import CardCollection from "@/components/nftCollection/CardCollection";
 import { Button } from "@/components/ui/button";
+import { useGetCampaignInfoByPeriod } from "@/hooks/getCampaign";
+import { IDetailCampaign } from "@/interfaces/campaign.interface";
 import useDialog from "@/store/UIProvider/dialog.store";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const CampaignList = () => {
   const { openDialog, setDialogView } = useDialog();
 
+  const { result: runningCampaign } = useGetCampaignInfoByPeriod("running");
+  const { result: endedCampaign } = useGetCampaignInfoByPeriod("past");
+  const { result: upcommingCampaign } = useGetCampaignInfoByPeriod("upcoming");
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   return (
-    <main className="flex  h-full w-full   flex-col bg-[rgba(0,0,0,0.75)] ">
-      <div className=" w-full  flex flex-col  pt-32 px-3 lg:px-16">
+    <main className="flex  h-full w-full   flex-col bg-[hsla(0,0%,0%,1)] ">
+      <div className=" w-full  flex flex-col  py-32 px-3 lg:px-16 gap-4">
         <span className=" text-[32px] font-semibold">Campaign List</span>
         {/* On going Campaign  */}
-        <span className="pt-10 pb-10 text-[32px] font-semibold ">
+        {isClient && runningCampaign?.length > 0 ? (
+          <div>
+            <p className="py-10 text-[32px] font-semibold ">
+              On going Campaign
+            </p>
+            <div className="flex flex-row w-full overflow-scroll gap-5">
+              {runningCampaign?.map((item, index) => (
+                <CampaignListItems
+                  key={index}
+                  detail={item as IDetailCampaign}
+                />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <p className="grid place-items-center min-h-[500px]">
+            No campaign found
+          </p>
+        )}
+
+        {isClient && endedCampaign?.length > 0 ? (
+          <>
+            <p className="pt-10 pb-10 text-[32px] font-semibold ">
+              Ended Campaign
+            </p>
+            <div className="flex flex-row w-full overflow-scroll  gap-5">
+              {endedCampaign?.map((item, index) => (
+                <CampaignListItems
+                  key={index}
+                  detail={item as IDetailCampaign}
+                />
+              ))}
+            </div>
+          </>
+        ) : (
+          <p className="grid place-items-center min-h-[500px]">
+            No campaign found
+          </p>
+        )}
+
+        {isClient && upcommingCampaign?.length > 0 ? (
+          <>
+            <p className="pt-10 pb-10 text-[32px] font-semibold ">
+              Upcoming Campaign
+            </p>
+            <div className="flex flex-row w-full overflow-scroll  gap-10">
+              {upcommingCampaign?.map((item, index) => (
+                <CampaignListItems
+                  key={index}
+                  detail={item as IDetailCampaign}
+                />
+              ))}
+            </div>
+          </>
+        ) : (
+          <p className="grid place-items-center min-h-[500px]">
+            No campaign found
+          </p>
+        )}
+        {/* <span className="pt-10 pb-10 text-[32px] font-semibold ">
           On going Campaign
         </span>
         <div className="flex flex-col justify-center items-start">
@@ -30,9 +102,9 @@ const CampaignList = () => {
               <span className=" text-2xl font-semibold">CaffeineCraft</span>
             </div>
           </div>
-        </div>
+        </div> */}
         {/* Upcomming Campaign */}
-        <span className="pt-10 pb-10 text-[32px] font-semibold ">
+        {/* <span className="pt-10 pb-10 text-[32px] font-semibold ">
           Upcomming Campaign
         </span>
         <div className="flex flex-col justify-center items-start">
@@ -50,9 +122,9 @@ const CampaignList = () => {
               <span className=" text-2xl font-semibold">CaffeineCraft</span>
             </div>
           </div>
-        </div>
+        </div> */}
         {/*  Ended  Campaign */}
-        <span className="pt-10 pb-10 text-[32px] font-semibold ">
+        {/* <span className="pt-10 pb-10 text-[32px] font-semibold ">
           Ended Campaign
         </span>
         <div className="flex flex-col justify-center items-start">
@@ -70,8 +142,8 @@ const CampaignList = () => {
               <span className=" text-2xl font-semibold">CaffeineCraft</span>
             </div>
           </div>
-        </div>
-        <div className="w-full flex justify-center items-center pb-20">
+        </div> */}
+        {/* <div className="w-full flex justify-center items-center pb-20">
           <Button
             type="button"
             variant="ghost"
@@ -84,7 +156,7 @@ const CampaignList = () => {
           >
             <h5 className=" text-white font-medium">See more</h5>
           </Button>
-        </div>
+        </div> */}
       </div>
     </main>
   );
