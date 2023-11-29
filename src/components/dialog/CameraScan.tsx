@@ -11,10 +11,16 @@ import { Button } from "../ui/button";
 export function CameraScan() {
   const [data, setData] = useState<string>("No result");
   const { closeDialog } = useDialog();
+  const [cameraOpen, setCameraOpen] = useState(true);
 
-  useEffect(() => {
-    console.log("data", data);
-  }, [data]);
+  const handleScan = (result: any) => {
+    console.log("result", result);
+    if (result !== null) {
+      setData(result);
+      setCameraOpen(false);
+      closeDialog();
+    }
+  };
 
   return (
     <DialogContent className="max-w-[350px] ssm:max-w-[480px] px-5 rounded-2xl">
@@ -24,15 +30,16 @@ export function CameraScan() {
         </DialogTitle>
       </DialogHeader>
       <hr className="border-[#3D3D3D]"></hr>
-      <QrReader
-        onError={(error: unknown) => {
-          console.error(error, "error");
-        }}
-        onScan={(result: any) => {
-          setData(result);
-        }}
-        style={{ width: "100%" }}
-      />
+      {cameraOpen && (
+        <QrReader
+          onError={(error: unknown) => {
+            console.error(error, "error");
+          }}
+          onScan={handleScan}
+          style={{ width: "100%" }}
+        />
+      )}
+
       <p>{data}</p>
       <hr className="  border-[#3D3D3D]"></hr>
 

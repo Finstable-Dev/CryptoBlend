@@ -8,11 +8,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { addressList } from "@/constants/addressList";
 import PinataService from "@/services/pinata.service";
 import useDialog from "@/store/UIProvider/dialog.store";
+import { DialogStates, DialogViews } from "@/store/UIProvider/dialog.type";
 import { Campaign__factory } from "@/typechain-types";
 import { getMetadataUrl } from "@/utils/metadaUrl";
+import { set } from "date-fns";
 import Image from "next/image";
 import { NFTStorage } from "nft.storage";
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useContractWrite, useAccount } from "wagmi";
 interface IBinaryImageData {
   pointer: number;
@@ -20,12 +22,11 @@ interface IBinaryImageData {
   imageSrc: string;
 }
 const Addcampaign = () => {
-  const { openDialog, setDialogView } = useDialog();
+  const { openDialog, setDialogView, setDialogState } = useDialog();
   const [selectedStartDate, setSelectedStartDate] = useState<Date>(new Date());
   const [selecteEndDate, setSelectedEndDate] = useState<Date>(new Date());
   const [name, setName] = useState<string>("");
   const [detail, setDetail] = useState<string>("");
-  let baseURI = "";
   const [binaryImageData, setBinaryImageData] = useState<
     Array<IBinaryImageData>
   >([]);
@@ -83,29 +84,33 @@ const Addcampaign = () => {
       files.push(imageFile);
     });
     const cid = await client.storeDirectory(files);
-    console.log("image CID:", cid);
-    const imageBaseUrl = getMetadataUrl(cid);
+    const imageBaseUrl = await getMetadataUrl(cid);
     const jsonCid = await PinataService.NFTStorageUploadFolder(imageBaseUrl);
-    const jsonBaseUrl = getMetadataUrl(jsonCid);
-    baseURI = jsonBaseUrl;
+    const jsonBaseUrl = await getMetadataUrl(jsonCid);
+    await writeAsync({
+      args: [
+        name,
+        detail,
+        jsonBaseUrl,
+        BigInt(Math.floor(new Date(selectedStartDate).getTime() / 1000)),
+        BigInt(Math.floor(new Date(selecteEndDate).getTime() / 1000)),
+      ],
+    });
   };
 
-  const { write } = useContractWrite({
+  const { writeAsync, isError, isSuccess } = useContractWrite({
     address: addressList.Campaign,
     abi: Campaign__factory.abi,
     functionName: "createCampaign",
-    args: [
-      name,
-      detail,
-      baseURI,
-      BigInt(Math.floor(new Date(selectedStartDate).getTime() / 1000)),
-      BigInt(Math.floor(new Date(selecteEndDate).getTime() / 1000)),
-    ],
   });
 
-  const createCampaign = useCallback(() => {
-    write();
-  }, [name, detail, selectedStartDate, selecteEndDate, write]);
+  useEffect(() => {
+    if (isSuccess) {
+      setDialogState(DialogStates.SUCCESS);
+    } else if (isError) {
+      setDialogState(DialogStates.ERROR);
+    }
+  }, [isSuccess, isError, setDialogState]);
 
   const imageInputs = [];
   for (let i = 1; i <= 9; i++) {
@@ -233,10 +238,10 @@ const Addcampaign = () => {
         <div className="w-full flex justify-center items-center mb-5">
           <Button
             onClick={async () => {
-              setIsLoading(true);
+              setDialogView(DialogViews.STATE_DIALOG);
+              setDialogState(DialogStates.LOADING);
+              openDialog();
               await upload();
-              createCampaign();
-              setIsLoading(false);
             }}
             type="button"
             variant="ghost"
