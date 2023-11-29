@@ -1,12 +1,13 @@
 import { create, StoreApi } from "zustand";
 import { devtools } from "zustand/middleware";
 
-import { DialogViews, IDialog } from "./dialog.type";
+import { DialogStates, DialogViews, IDialog } from "./dialog.type";
 
 const initialState = {
   displayDialog: false,
   dialogView: DialogViews.CLAIM_DIALOG,
   id: 0,
+  dialogState: "",
 };
 
 const useDialog = create(
@@ -24,6 +25,9 @@ const useDialog = create(
     },
     setId: (id: number) => {
       set({ id });
+    },
+    setDialogState: (state: DialogStates) => {
+      set({ dialogState: state });
     },
   }))
 );
