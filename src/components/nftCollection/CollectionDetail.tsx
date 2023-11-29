@@ -99,14 +99,6 @@ export const CollectionDetail = () => {
               </div>
             </div>
           )}
-
-          {endedCampaign?.length === 0 &&
-            upcommingCampaign?.length === 0 &&
-            runningCampaign?.length === 0 && (
-              <p className="grid place-items-center min-h-[500px]">
-                No campaign found
-              </p>
-            )}
         </TabsContent>
 
         <TabsContent value="running" className="min-h-[500px]">

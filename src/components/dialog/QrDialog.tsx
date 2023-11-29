@@ -17,7 +17,8 @@ import { toast } from "../ui/use-toast";
 // }
 
 export function QrDialog() {
-  const { closeDialog } = useDialog();
+  const { closeDialog, id } = useDialog();
+
   const { address } = useAccount();
   // const [shortAddress, setShortAddress] = useState<string>();
   const copyText = (text: string) => {
@@ -35,8 +36,8 @@ export function QrDialog() {
   // }, [address]);
 
   const objValue = {
-    address: "0xC0faa153aa9BA5B337DC4Ec2552e8A7E36899d15",
-    id: 1,
+    address: address,
+    id: id,
   };
 
   return (
@@ -80,13 +81,18 @@ export function QrDialog() {
         <hr className=" w-[40%]  border-[#3D3D3D]" />
       </div>
       <div className=" flex flex-row justify-center items-center ">
-        <p className=" text-[14px] text-[#f6f6f6] overflow-scroll max-w-[250px] ssm:max-w-[100%] w-full  font-medium p-2 border-[1px] h-[40px] border-[#BDBDBD] hover:border-[#FFA532] bg-[#3D3D3D] rounded-[6px]">
-          {address || "0xC0faa153aa9BA5B337DC4Ec2552e8A7E36899d15"}
+        <p className=" text-[14px] text-[#f6f6f6] overflow-scroll max-w-[250px] ssm:max-w-[450px] w-full  font-medium p-2 border-[1px] h-[40px] border-[#BDBDBD] hover:border-[#FFA532] bg-[#3D3D3D] rounded-[6px]">
+          {`${address},${id}`}
         </p>
         <div className="p-2 border-[1px] border-[#BDBDBD] icon hover:border-[#FFA532] bg-[#3D3D3D] rounded-[6px] h-[40px] ml-2">
           <Copy
             onClick={() => {
-              copyText(address || "");
+              copyText(
+                `{
+                address: ${address},
+                id: ${id}
+              }` || ""
+              );
             }}
             className=" cursor-pointer "
             size={21}

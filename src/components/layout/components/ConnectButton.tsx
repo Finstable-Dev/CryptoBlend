@@ -1,10 +1,19 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { AlertTriangleIcon, Wallet } from "lucide-react";
+import { AlertTriangleIcon, ScanLine, Wallet } from "lucide-react";
 import Image from "next/image";
 
 import { Button } from "../../ui/button";
+import useDialog from "@/store/UIProvider/dialog.store";
+import { DialogViews } from "@/store/UIProvider/dialog.type";
+import GasButton from "./GasButton";
 
 export const ConnectButtonCustom = () => {
+  const { openDialog, setDialogView } = useDialog();
+
+  const onClickOpen = () => {
+    setDialogView(DialogViews.SCAN_QR);
+    openDialog();
+  };
   return (
     <ConnectButton.Custom>
       {({
@@ -24,7 +33,6 @@ export const ConnectButtonCustom = () => {
           account &&
           chain &&
           (!authenticationStatus || authenticationStatus === "authenticated");
-
         return (
           <div
             {...(!ready && {
@@ -108,19 +116,19 @@ export const ConnectButtonCustom = () => {
                       className="rounded-l-none font-semibold"
                       onClick={openAccountModal}
                     >
-                      <div className="grid grid-cols-3 items-center gap-2">
-                        <p>
-                          {account.displayBalance
-                            ? `${account.displayBalance}`
-                            : ""}
-                        </p>
-
-                        <div className="rounded-lg bg-black/10 px-2 py-1 col-span-2">
-                          {account.displayName}
-                        </div>
+                      <div className="rounded-lg bg-black/10 px-2 py-1 col-span-2">
+                        {account.displayName}
                       </div>
                     </Button>
                   </div>
+
+                  <div
+                    onClick={() => onClickOpen()}
+                    className="flex flex-row items-center justify-center gap-2 border-[1px] border-[#FF7000] px-3 py-[10px] rounded-full bg-[#461804] cursor-pointer ml-3"
+                  >
+                    <ScanLine color="#FFA532" size={20} />
+                  </div>
+                  <GasButton balance={account.balanceFormatted || ""} />
 
                   <div className="lg:hidden flex items-center gap-1">
                     <Button

@@ -108,11 +108,14 @@ const CardCollection: React.FC<{
                       </div>
 
                       <button
+                        disabled={Number(item.attributes[0].value) < 9}
                         className=" flex h-[48px] py-3 px-6 justify-center items-center rounded-full "
                         style={{
                           borderRadius: "99px",
                           background:
-                            "linear-gradient(282.7deg, #FFA532 0%, #FF7000 72.62%)",
+                            Number(item.attributes[0].value) < 9
+                              ? "#3D3D3D"
+                              : "linear-gradient(282.7deg, #FFA532 0%, #FF7000 72.62%)",
                         }}
                         onClick={() => onClickOpen(item.id)}
                       >
