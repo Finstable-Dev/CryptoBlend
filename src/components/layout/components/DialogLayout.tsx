@@ -9,6 +9,7 @@ import { QrDialog } from "@/components/dialog/QrDialog";
 import { ScanQR } from "@/components/dialog/ScanQR";
 import { DialogViews } from "@/store/UIProvider/dialog.type";
 import { Dialog } from "../../ui/dialog";
+import { SuccessDialog } from "@/components/dialog/SuccessDialog";
 
 function DialogUI() {
   const { displayDialog, dialogView, closeDialog } = useDialog();
@@ -19,6 +20,7 @@ function DialogUI() {
       {dialogView === DialogViews.SCAN_QR && <ScanQR />}
       {dialogView === DialogViews.CLAIM_NFT_DIALOG && <ClaimNFTDialog />}
       {dialogView === DialogViews.CAMERA_SCAN && <CameraScan />}
+      {dialogView === DialogViews.STATE_DIALOG && <SuccessDialog />}
     </Dialog>
   );
 }
