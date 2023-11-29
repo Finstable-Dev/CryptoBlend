@@ -38,9 +38,9 @@ export default function Navbar() {
           </div>
         ) : (
           <div className="flex flex-row items-center justify-center gap-5">
-            <Link href="/admin/claimNFT">
+            <Link href="/admin">
               <h4 className=" font-extralight lg:font-medium text-quaternary">
-                Claim NFT
+                Home
               </h4>
             </Link>
             <Link href="/admin/addcampaign">
@@ -49,7 +49,7 @@ export default function Navbar() {
               </h4>
             </Link>
 
-            <Link href="/admin">
+            <Link href="/admin/campaignlist">
               <h4 className=" font-medium text-quaternary">Campaign List</h4>
             </Link>
 
