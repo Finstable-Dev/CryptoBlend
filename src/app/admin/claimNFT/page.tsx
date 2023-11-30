@@ -1,17 +1,16 @@
 "use client";
 
 import InputBase from "@/components/base/input/inputbase";
-import { addressList } from "@/constants/addressList";
 import { useGetSuccessToken } from "@/hooks/addPoint";
 import useDialog from "@/store/UIProvider/dialog.store";
 import { DialogViews } from "@/store/UIProvider/dialog.type";
 import { ScanLine, ScanSearch, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ClaimNFT = () => {
-  const { openDialog, setDialogView, setId } = useDialog();
+  const { openDialog, setDialogView, setId, resultScan } = useDialog();
   const [search, setSearch] = useState<string>("");
   const onClickOpen = (id: number) => {
     setId(id);
@@ -26,10 +25,12 @@ const ClaimNFT = () => {
         ? undefined
         : Number(search.split(",")[1]),
   });
-
-  // const { data, isError, isLoading }: any = useEnsAddress({
-  //   name: search,
-  // });
+  useEffect(() => {
+    if (resultScan) {
+      const { address, id } = JSON.parse(resultScan);
+      setSearch(`${address},${id}`);
+    }
+  }, [resultScan]);
 
   return (
     <main className="flex  h-[100dvh] w-full   flex-col bg-[rgba(0,0,0,0.75)] ">
@@ -51,6 +52,7 @@ const ClaimNFT = () => {
           icon={<ScanLine color="white" size={20} />}
           icon2={<Search color="white" size={20} />}
           icon2Position="left"
+          value={search}
           onChange={(e) => {
             setSearch(e.target.value);
           }}

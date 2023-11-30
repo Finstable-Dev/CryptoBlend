@@ -31,7 +31,7 @@ export function ClaimNFTDialog() {
   }, [isSuccess, isError, setDialogState]);
 
   const Claim = async () => {
-    setDialogView(DialogViews.STATE_DIALOG);
+    setDialogView(DialogViews.ADD_POINT_DIALOG);
     setDialogState(DialogStates.LOADING);
     await writeAsync();
   };
