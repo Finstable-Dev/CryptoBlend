@@ -161,7 +161,7 @@ export interface CryptoCoffPointInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "safeMint",
-    values: [AddressLike, BigNumberish]
+    values: [AddressLike, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "safeTransferFrom(address,address,uint256)",
@@ -495,7 +495,7 @@ export interface CryptoCoffPoint extends BaseContract {
   >;
 
   safeMint: TypedContractMethod<
-    [to: AddressLike, point: BigNumberish],
+    [to: AddressLike, point: BigNumberish, _campaignId: BigNumberish],
     [void],
     "nonpayable"
   >;
@@ -637,7 +637,7 @@ export interface CryptoCoffPoint extends BaseContract {
   getFunction(
     nameOrSignature: "safeMint"
   ): TypedContractMethod<
-    [to: AddressLike, point: BigNumberish],
+    [to: AddressLike, point: BigNumberish, _campaignId: BigNumberish],
     [void],
     "nonpayable"
   >;
