@@ -1,10 +1,10 @@
 import { DialogContent } from "@/components/ui/dialog";
 import useDialog from "@/store/UIProvider/dialog.store";
-import { Button } from "../ui/button";
-import { Loader2, XCircle } from "lucide-react";
-import { CorrectIcon } from "../svgIcon/CorrectIcon";
 import { DialogStates } from "@/store/UIProvider/dialog.type";
+import { XCircle } from "lucide-react";
 import Link from "next/link";
+import { CorrectIcon } from "../svgIcon/CorrectIcon";
+import { Button } from "../ui/button";
 
 export function SuccessDialog() {
   const { closeDialog, dialogState } = useDialog();
@@ -12,7 +12,7 @@ export function SuccessDialog() {
   return (
     <DialogContent className="max-w-[350px] ssm:max-w-[380px] px-5 rounded-2xl">
       {dialogState === DialogStates.LOADING && (
-        <div className="flex flex-col justify-center items-center p-8 gap-5">
+        <div className="flex flex-col justify-center items-center px-8 py-24 gap-5">
           <span className="loader"></span>
         </div>
       )}
@@ -47,7 +47,7 @@ export function SuccessDialog() {
             >
               <h5 className=" text-white font-medium">Close</h5>
             </Button>
-            <Link href={"/admin"}>
+            <Link href={"/admin/campaignlist"}>
               <Button
                 onClick={() => {
                   closeDialog();

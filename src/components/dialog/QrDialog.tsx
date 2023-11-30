@@ -11,16 +11,10 @@ import { useAccount } from "wagmi";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
 
-// interface valueQR {
-//   adress?: string;
-//   id?: number;
-// }
-
 export function QrDialog() {
   const { closeDialog, id } = useDialog();
 
   const { address } = useAccount();
-  // const [shortAddress, setShortAddress] = useState<string>();
   const copyText = (text: string) => {
     navigator.clipboard.writeText(text);
     toast({
@@ -28,12 +22,6 @@ export function QrDialog() {
       description: "Copy Success",
     });
   };
-
-  // useEffect(() => {
-  //   if (address) {
-  //     setShortAddress(`${address.slice(0, 6)} ... ${address.slice(-4)}`);
-  //   }
-  // }, [address]);
 
   const objValue = {
     address: address,
@@ -64,7 +52,7 @@ export function QrDialog() {
           <QRCode
             size={256}
             bgColor="transparent"
-            fgColor="#3D3D3D"
+            fgColor="#000000"
             className="bg-gradient-to-br from-orange-500 to-orange-700 text-black"
             style={{ height: "194px", width: "194px" }}
             value={JSON.stringify(objValue)}
