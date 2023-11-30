@@ -3,7 +3,7 @@ import { IMetadata } from "@/interfaces/campaign.interface";
 import readMetadataService from "@/services/readMetadata.service";
 import { CryptoCoffPoint__factory } from "@/typechain-types";
 import { useMemo } from "react";
-import { useContractRead, useAccount, useContractReads } from "wagmi";
+import { useAccount, useContractRead, useContractReads } from "wagmi";
 
 export function useGetSuccessToken() {
   const { address } = useAccount();

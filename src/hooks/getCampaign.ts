@@ -1,10 +1,9 @@
 import { addressList } from "@/constants/addressList";
-import { useContractRead, useContractReads } from "wagmi";
+import { IDetailCampaign, IMetadata } from "@/interfaces/campaign.interface";
+import readMetadataService from "@/services/readMetadata.service";
 import { Campaign__factory, CryptoCoffPoint__factory } from "@/typechain-types";
 import { useEffect, useMemo, useState } from "react";
-import { IDetailCampaign, IMetadata } from "@/interfaces/campaign.interface";
-import { useAccount } from "wagmi";
-import readMetadataService from "@/services/readMetadata.service";
+import { useAccount, useContractRead, useContractReads } from "wagmi";
 
 export function useGetAllCampaigns() {
   const { data } = useContractRead({
@@ -20,6 +19,34 @@ export function useGetAllCampaigns() {
   }, [data]);
 
   return { campaigns };
+}
+
+export function GetrunningCampaing() {
+  const { campaigns } = useGetAllCampaigns()
+  const [campaignId, setCampaignId] = useState<number | undefined>(undefined)
+  const contract = {
+    address: addressList.Campaign,
+    abi: Campaign__factory.abi,
+    functionName: "isRunningCampaign",
+  }
+  const contracts: any[] = []
+
+  campaigns.map((item) => {
+    contracts.push({ ...contract, args: [BigInt(item)] })
+  })
+
+  const { data } = useContractReads({
+    contracts
+  })
+
+  useEffect(() => {
+    data?.map((dataitem, index) => {
+      if (dataitem.result === true) return setCampaignId(campaigns[index])
+    })
+  }, [campaigns, setCampaignId])
+
+  return { campaignId }
+
 }
 
 export function useGetCampaignInfo(id: number) {

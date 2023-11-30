@@ -25,9 +25,10 @@ const InputBase = ({
   inputClassName,
   ...props
 }: InputBaseProps & InputProps) => {
-  const { openDialog, setDialogView } = useDialog();
+  const { setResultScan, openDialog, setDialogView } = useDialog();
 
   const onClickOpen = () => {
+    setResultScan("");
     setDialogView(DialogViews.CAMERA_SCAN);
     openDialog();
   };
