@@ -11,11 +11,10 @@ import useDialog from "@/store/UIProvider/dialog.store";
 import { DialogStates, DialogViews } from "@/store/UIProvider/dialog.type";
 import { Campaign__factory } from "@/typechain-types";
 import { getMetadataUrl } from "@/utils/metadaUrl";
-import { set } from "date-fns";
 import Image from "next/image";
 import { NFTStorage } from "nft.storage";
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
-import { useContractWrite, useAccount } from "wagmi";
+import { ChangeEvent, useEffect, useState } from "react";
+import { useContractWrite } from "wagmi";
 interface IBinaryImageData {
   pointer: number;
   binaryData: ArrayBuffer | string;
@@ -237,6 +236,7 @@ const Addcampaign = () => {
         </div>
         <div className="w-full flex justify-center items-center mb-5">
           <Button
+            disabled={binaryImageData.length < 10}
             onClick={async () => {
               setDialogView(DialogViews.STATE_DIALOG);
               setDialogState(DialogStates.LOADING);

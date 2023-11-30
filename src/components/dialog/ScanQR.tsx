@@ -15,7 +15,6 @@ import { CorrectIcon } from "../svgIcon/CorrectIcon";
 export function ScanQR() {
   const { closeDialog } = useDialog();
   const { address } = useAccount();
-  // const [shortAddress, setShortAddress] = useState<string>();
 
   const copyText = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -24,12 +23,6 @@ export function ScanQR() {
       description: "Copy Success",
     });
   };
-
-  // useEffect(() => {
-  //   if (address) {
-  //     setShortAddress(`${address.slice(0, 6)} ... ${address.slice(-4)}`);
-  //   }
-  // }, [address]);
 
   const objValue = {
     address: address,
@@ -59,8 +52,8 @@ export function ScanQR() {
           <QRCode
             size={256}
             bgColor="transparent"
-            fgColor="#3D3D3D"
-            className="bg-gradient-to-br from-orange-500 to-orange-700 text-black"
+            fgColor="#000000"
+            className="bg-gradient-to-br from-orange-500 to-orange-700 text-black "
             style={{ height: "194px", width: "194px" }}
             value={JSON.stringify(objValue)}
             viewBox={`0 0 256 256`}

@@ -3,8 +3,9 @@ export enum DialogViews {
   QR_DIALOG = "qr-dialog",
   SCAN_QR = "scan-qr",
   CLAIM_NFT_DIALOG = "claim-nft-dialog",
-  CAMERA_SCAN = "camera-scan-",
+  CAMERA_SCAN = "camera-scan",
   STATE_DIALOG = "state-dialog",
+  ADD_POINT_DIALOG = "add_point_dialog"
 }
 
 export enum DialogStates {
@@ -17,10 +18,12 @@ export interface IDialog {
   displayDialog: boolean;
   dialogView: DialogViews;
   id: number;
+  resultScan: string
   dialogState: DialogStates;
   openDialog: () => void;
   closeDialog: () => void;
   setDialogView: (view: DialogViews) => void;
   setId: (id: number) => void;
+  setResultScan: (resultScan: string) => void;
   setDialogState: (state: DialogStates) => void;
 }

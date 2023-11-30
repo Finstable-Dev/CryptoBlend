@@ -8,6 +8,7 @@ const initialState = {
   dialogView: DialogViews.CLAIM_DIALOG,
   id: 0,
   dialogState: "",
+  resultScan: '',
 };
 
 const useDialog = create(
@@ -23,9 +24,15 @@ const useDialog = create(
     setDialogView: (view: DialogViews) => {
       set({ dialogView: view });
     },
+
+    setResultScan: (resultScan) => {
+      set({ resultScan });
+    },
+
     setId: (id: number) => {
       set({ id });
     },
+
     setDialogState: (state: DialogStates) => {
       set({ dialogState: state });
     },
