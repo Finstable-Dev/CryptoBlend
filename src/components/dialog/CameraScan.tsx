@@ -4,21 +4,20 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import useDialog from "@/store/UIProvider/dialog.store";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import QrReader from "react-qr-reader";
 import { Button } from "../ui/button";
 
 export function CameraScan() {
-  const [data, setData] = useState<string>("No result");
-  const { closeDialog } = useDialog();
+  const { resultScan, setResultScan, closeDialog } = useDialog();
   const [cameraOpen, setCameraOpen] = useState(true);
 
   const handleScan = (result: any) => {
-    console.log("result", result);
     if (result !== null) {
-      setData(result);
+      setResultScan(result);
       setCameraOpen(false);
       closeDialog();
+      setCameraOpen(true);
     }
   };
 
@@ -40,7 +39,7 @@ export function CameraScan() {
         />
       )}
 
-      <p>{data}</p>
+      <p>{resultScan}</p>
       <hr className="  border-[#3D3D3D]"></hr>
 
       <Button
