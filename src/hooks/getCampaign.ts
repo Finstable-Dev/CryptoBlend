@@ -22,6 +22,38 @@ export function useGetAllCampaigns() {
   return { campaigns };
 }
 
+export function GetrunningCampaing() {
+  const { campaigns } = useGetAllCampaigns()
+  const contract = {
+    address: addressList.Campaign,
+    abi: Campaign__factory.abi,
+    functionName: "isRunningCampaign",
+  }
+  const contracts: any[] = []
+
+  campaigns.map((item) => {
+    contracts.push({ ...contract, args: [BigInt(item)] })
+
+  })
+
+  const { data } = useContractReads({
+    contracts
+  })
+
+  const campaignId = useMemo(() => {
+    data?.map((dataitem, index) => {
+      if (dataitem.result === true) {
+        return campaigns[index]
+      }
+    })
+
+  }, [])
+
+
+  return { campaignId }
+
+}
+
 export function useGetCampaignInfo(id: number) {
   const { data } = useContractRead({
     address: addressList.Campaign,

@@ -2,16 +2,25 @@
 
 import InputBase from "@/components/base/input/inputbase";
 import { Button } from "@/components/ui/button";
-import useDialog from "@/store/UIProvider/dialog.store";
-import { Minus, Plus, ScanLine, Search } from "lucide-react";
+import { addressList } from "@/constants/addressList";
+import { GetrunningCampaing } from "@/hooks/getCampaign";
+import { CryptoCoffPoint__factory } from "@/typechain-types";
+import { Minus, Plus, ScanLine } from "lucide-react";
 import Link from "next/link";
-
 import { useState } from "react";
+import { useContractWrite } from "wagmi";
 
 const AddPoint = () => {
   const [name, setName] = useState<string>("");
-  const [count, setCount] = useState<number>(0);
+  const [count, setCount] = useState<number>(1);
+  const { campaignId } = GetrunningCampaing();
+  const { writeAsync, isError, isSuccess } = useContractWrite({
+    address: addressList.Campaign,
+    abi: CryptoCoffPoint__factory.abi,
+    functionName: "addPoint",
+  });
 
+  console.log(campaignId);
   return (
     <main className="flex   flex-col  h-full w-full items-center justify-center  bg-[rgba(0,0,0,0.75)] ">
       <div className="max-w-[1000px] w-full h-[100dvh]  flex flex-col  pt-32 px-3 lg:px-16 gap-5">
@@ -30,9 +39,8 @@ const AddPoint = () => {
         <div className="flex flex-col gap-2">
           <h2 className="font-medium">Address</h2>
           <InputBase
-            placeholder="Search Address"
+            placeholder="0x00000000000"
             icon={<ScanLine color="white" size={20} />}
-            icon2={<Search color="white" size={20} />}
             icon2Position="left"
             onChange={(e) => {
               setName(e.target.value);
@@ -46,27 +54,23 @@ const AddPoint = () => {
           <div className=" flex flex-row gap-2 rounded-[48px] border-[1px] border-[#BDBDBD] bg-[#3D3D3D] max-w-[100px] w-full p-3">
             <Minus
               onClick={() => {
-                if (count > 0) {
+                if (count > 1) {
                   setCount(count - 1);
                 }
               }}
               className={`${
-                count === 0 ? " cursor-not-allowed" : " cursor-pointer"
+                count === 1 ? " cursor-not-allowed" : " cursor-pointer"
               }`}
-              color={count === 0 ? "#292929" : "#ffffff"}
+              color={count === 1 ? "#292929" : "#ffffff"}
               strokeWidth={1}
             />
             {count}
             <Plus
               onClick={() => {
-                if (count < 9) {
-                  setCount(count + 1);
-                }
+                setCount(count + 1);
               }}
-              color={count === 9 ? "#292929" : "#ffffff"}
-              className={`${
-                count === 9 ? " cursor-not-allowed" : " cursor-pointer"
-              }`}
+              color={"#ffffff"}
+              className=" cursor-pointer"
               strokeWidth={1}
             />
           </div>
