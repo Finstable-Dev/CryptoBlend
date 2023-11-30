@@ -25,7 +25,7 @@ export function AddPointDialog() {
           <div className="flex flex-col gap-5 justify-center items-center">
             <CorrectIcon />
             <div className="flex flex-col w-full">
-              <span className="w-full">Successfully added point!</span>
+              <span className="w-full">Transaction Successfully!</span>
               <span>You can check on the NFT.</span>
             </div>
           </div>

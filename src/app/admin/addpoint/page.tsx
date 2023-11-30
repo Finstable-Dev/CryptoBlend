@@ -34,7 +34,6 @@ const AddPoint = () => {
   useEffect(() => {
     if (resultScan) {
       const { address, id } = JSON.parse(resultScan);
-      console.log(address, id);
       setAddress(address);
     }
   }, [resultScan]);
