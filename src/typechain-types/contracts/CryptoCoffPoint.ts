@@ -107,7 +107,7 @@ export interface CryptoCoffPointInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "addPoint",
-    values: [AddressLike, BigNumberish]
+    values: [AddressLike, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "approve",
@@ -425,7 +425,11 @@ export interface CryptoCoffPoint extends BaseContract {
   IsClaimed: TypedContractMethod<[tokenId: BigNumberish], [boolean], "view">;
 
   addPoint: TypedContractMethod<
-    [customerAddress: AddressLike, point: BigNumberish],
+    [
+      _customerAddress: AddressLike,
+      _point: BigNumberish,
+      _campaignId: BigNumberish
+    ],
     [void],
     "nonpayable"
   >;
@@ -564,7 +568,11 @@ export interface CryptoCoffPoint extends BaseContract {
   getFunction(
     nameOrSignature: "addPoint"
   ): TypedContractMethod<
-    [customerAddress: AddressLike, point: BigNumberish],
+    [
+      _customerAddress: AddressLike,
+      _point: BigNumberish,
+      _campaignId: BigNumberish
+    ],
     [void],
     "nonpayable"
   >;
