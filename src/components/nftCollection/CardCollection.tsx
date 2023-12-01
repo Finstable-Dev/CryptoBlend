@@ -2,16 +2,28 @@ import { useGetTokenOfOwnerByCampaign } from "@/hooks/getCampaign";
 import { IDetailCampaign } from "@/interfaces/campaign.interface";
 import readMetadataService from "@/services/readMetadata.service";
 import useDialog from "@/store/UIProvider/dialog.store";
-import { DialogViews } from "@/store/UIProvider/dialog.type";
+import { DialogStates, DialogViews } from "@/store/UIProvider/dialog.type";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { CountDownNfr } from "./CountDownNfr";
+import { useContractWrite, useAccount } from "wagmi";
+import { addressList } from "@/constants/addressList";
+import { MemberEmitLog__factory } from "@/typechain-types";
 
 const CardCollection: React.FC<{
   detail: IDetailCampaign | null;
 }> = ({ detail }) => {
-  const { openDialog, setDialogView, setId } = useDialog();
+  const {
+    openDialog,
+    setDialogView,
+    setId,
+    id,
+    setDialogState,
+    setWriteAsync,
+  } = useDialog();
+  const { address } = useAccount();
   const [fullImageSrc, setFullImageSrc] = useState("");
+
   const onClickOpen = (id: number) => {
     setId(id);
     setDialogView(DialogViews.CLAIM_DIALOG);
@@ -21,6 +33,33 @@ const CardCollection: React.FC<{
   const { allTokenData, claimedToken } = useGetTokenOfOwnerByCampaign(
     detail?.id || 0
   );
+
+  // const { write, isLoading } = useContractWrite({
+  //   address: addressList.CryptoCoffMember,
+  //   abi: CryptoCoffMember__factory.abi,
+  //   functionName: "upgradeMember",
+  //   args: [BigInt(id), address!],
+  // });
+
+  // use chainlink
+  const { writeAsync, isError, isSuccess } = useContractWrite({
+    address: addressList.MemberEmitLog,
+    abi: MemberEmitLog__factory.abi,
+    functionName: "emitMemberLog",
+    args: [address!, BigInt(id), "member"],
+  });
+
+  useEffect(() => {
+    setWriteAsync(writeAsync as any);
+  }, [address, id]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      setDialogState(DialogStates.SUCCESS);
+    } else if (isError) {
+      setDialogState(DialogStates.ERROR);
+    }
+  }, [isSuccess, isError, setDialogState]);
 
   useEffect(() => {
     if (!detail?.baseURI) return;

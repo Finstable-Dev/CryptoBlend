@@ -1,14 +1,14 @@
 "use client";
 
+import { useGetMemberData } from "@/hooks/getMemberData";
+import { IMetadata } from "@/interfaces/campaign.interface";
+import readMetadataService from "@/services/readMetadata.service";
 import { Copy, User2 } from "lucide-react";
 import Image from "next/image";
 import React, { useCallback, useEffect } from "react";
 import { useAccount } from "wagmi";
 import { Progress } from "../ui/progress";
 import { toast } from "../ui/use-toast";
-import { useGetMemberData } from "@/hooks/getMemberData";
-import readMetadataService from "@/services/readMetadata.service";
-import { IMetadata } from "@/interfaces/campaign.interface";
 
 export const DetailCharacter = () => {
   const { address } = useAccount();
@@ -89,7 +89,7 @@ export const DetailCharacter = () => {
         </span>
         <div className=" flex flex-row justify-center items-center ">
           <p className=" text-[14px] text-[#f6f6f6] font-medium ">
-            {shortAddress || "0xC0...9d15"}
+            {shortAddress || "Please Connect wallet "}
           </p>
           <Copy
             onClick={() => {

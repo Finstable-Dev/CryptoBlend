@@ -3,23 +3,54 @@
 import InputBase from "@/components/base/input/inputbase";
 import { useGetSuccessToken } from "@/hooks/addPoint";
 import useDialog from "@/store/UIProvider/dialog.store";
-import { DialogViews } from "@/store/UIProvider/dialog.type";
+import { DialogStates, DialogViews } from "@/store/UIProvider/dialog.type";
 import { ScanLine, ScanSearch, Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useEnsAddress, useContractWrite } from "wagmi";
+import { addressList } from "@/constants/addressList";
+import { MemberEmitLog__factory } from "@/typechain-types";
 
 const ClaimNFT = () => {
-  const { openDialog, setDialogView, setId, resultScan } = useDialog();
+  const {
+    openDialog,
+    setDialogView,
+    setId,
+    resultScan,
+    id,
+    setDialogState,
+    setWriteAsync,
+  } = useDialog();
+  const [targetAddress, setTargetAddress] = useState<`0x${string}`>();
   const [search, setSearch] = useState<string>("");
   const onClickOpen = (id: number) => {
     setId(id);
     setDialogView(DialogViews.CLAIM_NFT_DIALOG);
+    setTargetAddress(
+      isAddress
+        ? (search.split(",")[0] as `0x${string}`)
+        : (data as `0x${string}`)
+    );
     openDialog();
   };
+  const isAddress = useMemo(() => {
+    if (
+      search.split(",")[0].charAt(0) === "0" &&
+      search.split(",")[0].charAt(1) === "x"
+    )
+      return true;
+    return false;
+  }, [search]);
+
+  const { data } = useEnsAddress({
+    name: isAddress ? "" : search.split(",")[0],
+  });
 
   const { successToken } = useGetSuccessToken({
-    address: search.split(",")[0] as `0x${string}`,
+    address: isAddress
+      ? (search.split(",")[0] as `0x${string}`)
+      : (data as `0x${string}`),
     id:
       search.split(",")[1] === undefined || search.split(",")[1] === ""
         ? undefined
@@ -29,8 +60,37 @@ const ClaimNFT = () => {
     if (resultScan) {
       const { address, id } = JSON.parse(resultScan);
       setSearch(`${address},${id}`);
+      setTargetAddress(address);
     }
   }, [resultScan]);
+
+  // const { writeAsync, isError, isSuccess } = useContractWrite({
+  //   address: addressList.CryptoCoffPoint,
+  //   abi: CryptoCoffPoint__factory.abi,
+  //   functionName: "claimPoint",
+  //   args: [BigInt(id)],
+  // });
+
+  // using chainlink
+  const { writeAsync, isError, isSuccess } = useContractWrite({
+    address: addressList.MemberEmitLog,
+    abi: MemberEmitLog__factory.abi,
+    functionName: "emitMemberLog",
+    args: [targetAddress!, BigInt(id), "coffee"],
+  });
+
+  useEffect(() => {
+    setWriteAsync(writeAsync as any);
+  }, [targetAddress, id]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      setDialogState(DialogStates.SUCCESS);
+      setSearch("");
+    } else if (isError) {
+      setDialogState(DialogStates.ERROR);
+    }
+  }, [isSuccess, isError, setDialogState]);
 
   return (
     <main className="flex  h-[100dvh] w-full   flex-col bg-[rgba(0,0,0,0.75)] ">
@@ -48,7 +108,7 @@ const ClaimNFT = () => {
           <h6>Claim NFT</h6>
         </div>
         <InputBase
-          placeholder="Search Address, Token ID"
+          placeholder="Search Address or Ens name, Token ID"
           icon={<ScanLine color="white" size={20} />}
           icon2={<Search color="white" size={20} />}
           icon2Position="left"
