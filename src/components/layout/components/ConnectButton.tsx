@@ -1,14 +1,32 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { AlertTriangleIcon, ScanLine, Wallet } from "lucide-react";
+import {
+  AlertTriangleIcon,
+  Menu,
+  ScanLine,
+  Wallet,
+  WalletCards,
+  X,
+} from "lucide-react";
 import Image from "next/image";
 
-import { Button } from "../../ui/button";
 import useDialog from "@/store/UIProvider/dialog.store";
 import { DialogViews } from "@/store/UIProvider/dialog.type";
+import useDrawer from "@/store/UIProvider/drawer.store";
+import { DrawerViews } from "@/store/UIProvider/drawer.type";
+import { usePathname } from "next/navigation";
+import { Button } from "../../ui/button";
 import GasButton from "./GasButton";
 
 export const ConnectButtonCustom = () => {
   const { openDialog, setDialogView } = useDialog();
+  const { openDrawer, setDrawerView, displayDrawer } = useDrawer();
+
+  const pathname = usePathname();
+
+  const onClickDrawer = () => {
+    setDrawerView(DrawerViews.NAVBAR_MENU);
+    openDrawer();
+  };
 
   const onClickOpen = () => {
     setDialogView(DialogViews.SCAN_QR);
@@ -80,7 +98,7 @@ export const ConnectButtonCustom = () => {
               }
               return (
                 <div className="flex flex-row">
-                  <div className="rounded-lg border-[1px] items-center lg:flex hidden">
+                  <div className="rounded-lg border-[1px] items-center md:flex hidden">
                     <Button
                       variant="ghost"
                       className="rounded-r-none font-semibold"
@@ -121,19 +139,32 @@ export const ConnectButtonCustom = () => {
                       </div>
                     </Button>
                   </div>
+                  {pathname === "/" ? (
+                    <>
+                      <div
+                        onClick={() => onClickOpen()}
+                        className="flex flex-row items-center justify-center gap-1 border-[1px] border-[#FF7000] px-3 py-[10px] rounded-full bg-[#461804] cursor-pointer ml-3 mr-2"
+                      >
+                        <ScanLine color="#FFA532" size={16} />
+                      </div>
+                      <GasButton balance={account.balanceFormatted || ""} />
+                    </>
+                  ) : (
+                    <div className="hidden md:flex flex-row ">
+                      <div
+                        onClick={() => onClickOpen()}
+                        className="flex flex-row items-center justify-center gap-1 border-[1px] border-[#FF7000] px-3 py-[10px] rounded-full bg-[#461804] cursor-pointer ml-3 mr-2"
+                      >
+                        <ScanLine color="#FFA532" size={16} />
+                      </div>
+                      <GasButton balance={account.balanceFormatted || ""} />
+                    </div>
+                  )}
 
-                  <div
-                    onClick={() => onClickOpen()}
-                    className="flex flex-row items-center justify-center gap-2 border-[1px] border-[#FF7000] px-3 py-[10px] rounded-full bg-[#461804] cursor-pointer ml-3"
-                  >
-                    <ScanLine color="#FFA532" size={20} />
-                  </div>
-                  <GasButton balance={account.balanceFormatted || ""} />
-
-                  <div className="lg:hidden flex items-center gap-1">
+                  <div className="md:hidden flex items-center gap-1">
                     <Button
                       variant="ghost"
-                      className="p-0 flex items-center justify-center hover:bg-transparent"
+                      className="p-0 hidden md:flex items-center justify-center hover:bg-transparent"
                       onClick={openChainModal}
                     >
                       {chain.hasIcon && (
@@ -159,13 +190,38 @@ export const ConnectButtonCustom = () => {
                       )}
                     </Button>
 
-                    <Button
-                      className="p-0 hover:bg-transparent"
-                      variant="ghost"
-                      onClick={openAccountModal}
-                    >
-                      <Wallet size={22} />
-                    </Button>
+                    {pathname === "/" ? (
+                      <>
+                        <Button
+                          className="flex flex-row items-center justify-center gap-2 border-[1px] border-[#FF7000] px-3 py-[10px] rounded-full bg-[#461804] cursor-pointer"
+                          variant="ghost"
+                          onClick={openAccountModal}
+                        >
+                          <WalletCards size={18} color="#FFA532" />
+                        </Button>
+                      </>
+                    ) : (
+                      <div className="md:hidden flex gap-4">
+                        <Button
+                          className=" flex flex-row items-center justify-center gap-2 border-[1px] border-[#FF7000] px-3 py-[10px] rounded-full bg-[#461804] cursor-pointer"
+                          variant="ghost"
+                          onClick={openAccountModal}
+                        >
+                          <WalletCards size={18} color="#FFA532" />
+                        </Button>
+                        <Button
+                          className="flex flex-row items-center justify-center gap-2 border-[1px] border-[#FF7000] px-[10px] py-[10px] rounded-full bg-[#461804] cursor-pointer"
+                          variant="ghost"
+                          onClick={onClickDrawer}
+                        >
+                          {displayDrawer ? (
+                            <X size={18} color="#FFA532" />
+                          ) : (
+                            <Menu size={18} color="#FFA532" />
+                          )}
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 </div>
               );

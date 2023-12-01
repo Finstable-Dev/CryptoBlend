@@ -5,7 +5,7 @@ import { DrawerViews, IDrawer } from "./drawer.type";
 
 const initialState = {
   displayDrawer: false,
-  drawerView: DrawerViews.CLAIMDIALOG,
+  drawerView: DrawerViews.NAVBAR_MENU,
 };
 
 const useDrawer = create(
