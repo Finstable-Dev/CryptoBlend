@@ -105,7 +105,7 @@ const CardCollection: React.FC<{
         </div>
       </div>
       {/*  */}
-      <div className="flex flex-row overflow-x-scroll sm:w-[500px] flex-1 w-screen no-scrollbar">
+      <div className="flex flex-row overflow-x-scroll sm:w-[500px] w-[calc(100vw_-_32px)] flex-1 no-scrollbar">
         {allTokenData.length === 0 ? (
           <p className="grid w-full h-full items-center text-center">
             No item found
