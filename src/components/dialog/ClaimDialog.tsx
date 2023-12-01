@@ -109,7 +109,6 @@ export function ClaimDialog() {
               setDialogView(DialogViews.ADD_POINT_DIALOG);
               setDialogState(DialogStates.LOADING);
               if (writeAsync) await writeAsync();
-              closeDialog();
             }
           }}
           type="button"

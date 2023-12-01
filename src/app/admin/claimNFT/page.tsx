@@ -86,6 +86,7 @@ const ClaimNFT = () => {
   useEffect(() => {
     if (isSuccess) {
       setDialogState(DialogStates.SUCCESS);
+      setSearch("");
     } else if (isError) {
       setDialogState(DialogStates.ERROR);
     }
