@@ -6,21 +6,42 @@ import { addressList } from "@/constants/addressList";
 import { GetrunningCampaing } from "@/hooks/getCampaign";
 import useDialog from "@/store/UIProvider/dialog.store";
 import { DialogStates, DialogViews } from "@/store/UIProvider/dialog.type";
-import { CryptoCoffPoint__factory } from "@/typechain-types";
+import { MemberEmitLog__factory } from "@/typechain-types";
 import { Minus, Plus, ScanLine } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useContractWrite } from "wagmi";
 
 const AddPoint = () => {
-  const { resultScan, openDialog, setDialogView, setDialogState } = useDialog();
+  const {
+    resultScan,
+    openDialog,
+    setDialogView,
+    setDialogState,
+    setWriteAsync,
+  } = useDialog();
   const [address, setAddress] = useState<string>("");
   const [point, setPoint] = useState<number>(1);
   const { campaignId } = GetrunningCampaing();
+  // const { writeAsync, isError, isSuccess } = useContractWrite({
+  //   address: addressList.CryptoCoffPoint,
+  //   abi: CryptoCoffPoint__factory.abi,
+  //   functionName: "addPoint",
+  //   args: [
+  //     address as `0x${string}`,
+  //     BigInt(point),
+  //     BigInt(Number(campaignId || 0)),
+  //   ],
+  //   onError: (error) => {
+  //     console.log(error);
+  //   },
+  // });
+
+  // using chainlink
   const { writeAsync, isError, isSuccess } = useContractWrite({
-    address: addressList.CryptoCoffPoint,
-    abi: CryptoCoffPoint__factory.abi,
-    functionName: "addPoint",
+    address: addressList.MemberEmitLog,
+    abi: MemberEmitLog__factory.abi,
+    functionName: "emitPointLog",
     args: [
       address as `0x${string}`,
       BigInt(point),

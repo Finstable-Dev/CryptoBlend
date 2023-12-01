@@ -6,34 +6,16 @@ import {
 import useDialog from "@/store/UIProvider/dialog.store";
 import { AlertCircle } from "lucide-react";
 import { Button } from "../ui/button";
-import { toast } from "../ui/use-toast";
-import { useEffect, useState } from "react";
-import { useContractWrite } from "wagmi";
-import { addressList } from "@/constants/addressList";
-import { CryptoCoffPoint__factory } from "@/typechain-types";
 import { DialogStates, DialogViews } from "@/store/UIProvider/dialog.type";
 
 export function ClaimNFTDialog() {
-  const { closeDialog, setDialogState, id, setDialogView } = useDialog();
-  const { writeAsync, isError, isSuccess } = useContractWrite({
-    address: addressList.CryptoCoffPoint,
-    abi: CryptoCoffPoint__factory.abi,
-    functionName: "claimPoint",
-    args: [BigInt(id)],
-  });
-
-  useEffect(() => {
-    if (isSuccess) {
-      setDialogState(DialogStates.SUCCESS);
-    } else if (isError) {
-      setDialogState(DialogStates.ERROR);
-    }
-  }, [isSuccess, isError, setDialogState]);
+  const { closeDialog, setDialogState, setDialogView, writeAsync } =
+    useDialog();
 
   const Claim = async () => {
     setDialogView(DialogViews.ADD_POINT_DIALOG);
     setDialogState(DialogStates.LOADING);
-    await writeAsync();
+    if (writeAsync) await writeAsync();
   };
 
   return (

@@ -5,6 +5,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 import {
   connectorsForWallets,
   RainbowKitProvider,
+  darkTheme,
 } from "@rainbow-me/rainbowkit";
 import {
   coinbaseWallet,
@@ -14,11 +15,11 @@ import {
   walletConnectWallet,
 } from "@rainbow-me/rainbowkit/wallets";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { polygonMumbai } from "wagmi/chains";
+import { polygonMumbai, mainnet } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 
 const { chains, publicClient } = configureChains(
-  [polygonMumbai],
+  [polygonMumbai, mainnet],
   [publicProvider()]
 );
 const projectId = process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID || "";
@@ -48,7 +49,17 @@ const wagmiConfig = createConfig({
 
 const WagmiProvider = ({ children }: { children: React.ReactNode }) => (
   <WagmiConfig config={wagmiConfig}>
-    <RainbowKitProvider chains={chains} modalSize="compact">
+    <RainbowKitProvider
+      chains={chains}
+      modalSize="compact"
+      theme={darkTheme({
+        accentColor: "#FF7000",
+        accentColorForeground: "white",
+        borderRadius: "small",
+        fontStack: "system",
+        overlayBlur: "small",
+      })}
+    >
       {children}
     </RainbowKitProvider>
   </WagmiConfig>
