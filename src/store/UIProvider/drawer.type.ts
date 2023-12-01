@@ -1,5 +1,5 @@
 export enum DrawerViews {
-  CLAIMDIALOG = "ClaimDialog",
+  NAVBAR_MENU = "navbar-menu",
 }
 
 export interface IDrawer {
