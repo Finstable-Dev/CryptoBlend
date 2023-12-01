@@ -1,5 +1,6 @@
 import { create, StoreApi } from "zustand";
 import { devtools } from "zustand/middleware";
+import { PrepareWriteContractConfig } from "@wagmi/core";
 
 import { DialogStates, DialogViews, IDialog } from "./dialog.type";
 
@@ -8,7 +9,10 @@ const initialState = {
   dialogView: DialogViews.CLAIM_DIALOG,
   id: 0,
   dialogState: "",
-  resultScan: '',
+  resultScan: "",
+  writeAsync: undefined as
+    | undefined
+    | ((args?: PrepareWriteContractConfig) => Promise<{ hash: string }>),
 };
 
 const useDialog = create(
@@ -35,6 +39,10 @@ const useDialog = create(
 
     setDialogState: (state: DialogStates) => {
       set({ dialogState: state });
+    },
+
+    setWriteAsync: (writeAsync) => {
+      set({ writeAsync });
     },
   }))
 );
