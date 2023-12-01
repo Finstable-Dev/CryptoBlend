@@ -69,7 +69,7 @@ export const CollectionDetail = () => {
           )}
 
           {isClient && upcommingCampaign?.length > 0 && (
-            <div className="border-b-2">
+            <div className="border-b-2 w-full">
               <p className="pt-10 pb-10 text-[32px] font-semibold ">
                 Upcoming Campaign
               </p>

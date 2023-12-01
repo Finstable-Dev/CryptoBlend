@@ -2,7 +2,7 @@
 
 import useDrawer from "@/store/UIProvider/drawer.store";
 
-import { ClaimDialog } from "@/components/dialog/ClaimDialog";
+import { NavbarMenu } from "@/components/base/drawer/NavbarMenu";
 import { DrawerViews } from "@/store/UIProvider/drawer.type";
 import { Sheet } from "../../ui/sheet";
 
@@ -11,7 +11,7 @@ function DrawerUI() {
 
   return (
     <Sheet open={displayDrawer} onOpenChange={closeDrawer}>
-      {drawerView === DrawerViews.CLAIMDIALOG && <ClaimDialog />}
+      {drawerView === DrawerViews.NAVBAR_MENU && <NavbarMenu />}
     </Sheet>
   );
 }
