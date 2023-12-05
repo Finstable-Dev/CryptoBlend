@@ -43,7 +43,7 @@ export function GetrunningCampaing() {
     data?.map((dataitem, index) => {
       if (dataitem.result === true) return setCampaignId(campaigns[index])
     })
-  }, [campaigns, setCampaignId])
+  }, [campaigns, setCampaignId, data])
 
   return { campaignId }
 
