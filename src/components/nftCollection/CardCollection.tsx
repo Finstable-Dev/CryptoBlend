@@ -1,14 +1,14 @@
+import { addressList } from "@/constants/addressList";
 import { useGetTokenOfOwnerByCampaign } from "@/hooks/getCampaign";
 import { IDetailCampaign } from "@/interfaces/campaign.interface";
 import readMetadataService from "@/services/readMetadata.service";
 import useDialog from "@/store/UIProvider/dialog.store";
 import { DialogStates, DialogViews } from "@/store/UIProvider/dialog.type";
+import { MemberEmitLog__factory } from "@/typechain-types";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { useAccount, useContractWrite } from "wagmi";
 import { CountDownNfr } from "./CountDownNfr";
-import { useContractWrite, useAccount } from "wagmi";
-import { addressList } from "@/constants/addressList";
-import { MemberEmitLog__factory } from "@/typechain-types";
 
 const CardCollection: React.FC<{
   detail: IDetailCampaign | null;
@@ -73,7 +73,7 @@ const CardCollection: React.FC<{
 
   return (
     <div className="flex sm:flex-row flex-col">
-      <div className=" flex flex-col my-auto max-w-[250px] h-[265px] sm:h-[515px] w-full justify-between mb-10">
+      <div className=" flex flex-col my-auto max-w-[250px] h-[265px] sm:h-[515px] w-full justify-between mb-10 mx-4">
         <div className="flex flex-row sm:flex-col  gap-2 h-full">
           <Image
             className="cursor-pointer w-[170px] h-[170px] rounded-[16px] border-[5px] border-[#FFA532]"
@@ -153,8 +153,10 @@ const CardCollection: React.FC<{
                           borderRadius: "99px",
                           background:
                             Number(item.attributes[0].value) < 9
-                              ? "#3D3D3D"
+                              ? "#3D3D3D "
                               : "linear-gradient(282.7deg, #FFA532 0%, #FF7000 72.62%)",
+                          opacity:
+                            Number(item.attributes[0].value) < 9 ? 0.5 : 1,
                         }}
                         onClick={() => onClickOpen(item.id)}
                       >
