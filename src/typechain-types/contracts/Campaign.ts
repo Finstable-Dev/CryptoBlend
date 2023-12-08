@@ -30,6 +30,7 @@ export declare namespace ICampaign {
     baseURI: string;
     timeStart: BigNumberish;
     timeEnd: BigNumberish;
+    expireClaim: BigNumberish;
     nftId: BigNumberish[];
   };
 
@@ -39,6 +40,7 @@ export declare namespace ICampaign {
     baseURI: string,
     timeStart: bigint,
     timeEnd: bigint,
+    expireClaim: bigint,
     nftId: bigint[]
   ] & {
     name: string;
@@ -46,6 +48,7 @@ export declare namespace ICampaign {
     baseURI: string;
     timeStart: bigint;
     timeEnd: bigint;
+    expireClaim: bigint;
     nftId: bigint[];
   };
 }
@@ -95,7 +98,7 @@ export interface CampaignInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "createCampaign",
-    values: [string, string, string, BigNumberish, BigNumberish]
+    values: [string, string, string, BigNumberish, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "getAllCampaign",
@@ -249,12 +252,13 @@ export interface Campaign extends BaseContract {
   campaigns: TypedContractMethod<
     [arg0: BigNumberish],
     [
-      [string, string, string, bigint, bigint] & {
+      [string, string, string, bigint, bigint, bigint] & {
         name: string;
         description: string;
         baseURI: string;
         timeStart: bigint;
         timeEnd: bigint;
+        expireClaim: bigint;
       }
     ],
     "view"
@@ -272,7 +276,8 @@ export interface Campaign extends BaseContract {
       _description: string,
       _baseURI: string,
       _timeStart: BigNumberish,
-      _timeEnd: BigNumberish
+      _timeEnd: BigNumberish,
+      _expireClaim: BigNumberish
     ],
     [void],
     "nonpayable"
@@ -335,12 +340,13 @@ export interface Campaign extends BaseContract {
   ): TypedContractMethod<
     [arg0: BigNumberish],
     [
-      [string, string, string, bigint, bigint] & {
+      [string, string, string, bigint, bigint, bigint] & {
         name: string;
         description: string;
         baseURI: string;
         timeStart: bigint;
         timeEnd: bigint;
+        expireClaim: bigint;
       }
     ],
     "view"
@@ -356,7 +362,8 @@ export interface Campaign extends BaseContract {
       _description: string,
       _baseURI: string,
       _timeStart: BigNumberish,
-      _timeEnd: BigNumberish
+      _timeEnd: BigNumberish,
+      _expireClaim: BigNumberish
     ],
     [void],
     "nonpayable"

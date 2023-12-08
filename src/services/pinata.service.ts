@@ -5,23 +5,37 @@ const NFTStorageUploadFolder = async (imageBaseUrl: string) => {
   const client = new NFTStorage({ token: NFT_STORAGE_TOKEN });
 
   const files = [];
-  for (let i = 1; i <= 10; i++) {
+  for (let i = 1; i <= 11; i++) {
     files.push(
       new File(
         [
           JSON.stringify(
             {
               name: `${
-                i === 10 ? "You have claimed this NFT" : `Your ${i} point`
+                i === 10
+                  ? "You have claimed this NFT"
+                  : i === 11
+                  ? "Your 9 point"
+                  : `Your ${i} point`
               }`,
               description: `${
-                i === 10 ? "You have claimed this NFT" : `You have ${i} point`
+                i === 10
+                  ? "You have claimed this NFT"
+                  : i === 11
+                  ? "You have 9 point"
+                  : `You have ${i} point`
               }`,
-              image: `${imageBaseUrl}${i === 10 ? "claimed" : `${i}point`}.png`,
+              image: `${imageBaseUrl}${
+                i === 10 ? "claimed" : i === 11 ? "9point" : `${i}point`
+              }.png`,
               attributes: [
                 {
                   "trait-type": "Point",
-                  value: i,
+                  value: i === 10 || i === 11 ? 9 : i,
+                },
+                {
+                  "trait-type": "Is Expired",
+                  value: i === 11,
                 },
               ],
             },
@@ -29,7 +43,13 @@ const NFTStorageUploadFolder = async (imageBaseUrl: string) => {
             2
           ),
         ],
-        `${i === 10 ? `claimed.json` : `${i}point.json`}`
+        `${
+          i === 10
+            ? `claimed.json`
+            : i === 11
+            ? "expired.json"
+            : `${i}point.json`
+        }`
       )
     );
   }

@@ -27,6 +27,7 @@ export declare namespace ICampaign {
     baseURI: string;
     timeStart: BigNumberish;
     timeEnd: BigNumberish;
+    expireClaim: BigNumberish;
     nftId: BigNumberish[];
   };
 
@@ -36,6 +37,7 @@ export declare namespace ICampaign {
     baseURI: string,
     timeStart: bigint,
     timeEnd: bigint,
+    expireClaim: bigint,
     nftId: bigint[]
   ] & {
     name: string;
@@ -43,6 +45,7 @@ export declare namespace ICampaign {
     baseURI: string;
     timeStart: bigint;
     timeEnd: bigint;
+    expireClaim: bigint;
     nftId: bigint[];
   };
 }
@@ -52,6 +55,7 @@ export interface ICampaignInterface extends Interface {
     nameOrSignature:
       | "addNftToCampaign"
       | "createCampaign"
+      | "getAllCampaign"
       | "getCampaignByPeriod"
       | "getCampaignInfo"
       | "hasCampaignRunning"
@@ -64,7 +68,11 @@ export interface ICampaignInterface extends Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "createCampaign",
-    values: [string, string, string, BigNumberish, BigNumberish]
+    values: [string, string, string, BigNumberish, BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getAllCampaign",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "getCampaignByPeriod",
@@ -89,6 +97,10 @@ export interface ICampaignInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "createCampaign",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getAllCampaign",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -164,11 +176,14 @@ export interface ICampaign extends BaseContract {
       _description: string,
       _baseURI: string,
       _timeStart: BigNumberish,
-      _timeEnd: BigNumberish
+      _timeEnd: BigNumberish,
+      _expireClaim: BigNumberish
     ],
     [void],
     "nonpayable"
   >;
+
+  getAllCampaign: TypedContractMethod<[], [bigint[]], "view">;
 
   getCampaignByPeriod: TypedContractMethod<
     [period: string],
@@ -213,11 +228,15 @@ export interface ICampaign extends BaseContract {
       _description: string,
       _baseURI: string,
       _timeStart: BigNumberish,
-      _timeEnd: BigNumberish
+      _timeEnd: BigNumberish,
+      _expireClaim: BigNumberish
     ],
     [void],
     "nonpayable"
   >;
+  getFunction(
+    nameOrSignature: "getAllCampaign"
+  ): TypedContractMethod<[], [bigint[]], "view">;
   getFunction(
     nameOrSignature: "getCampaignByPeriod"
   ): TypedContractMethod<[period: string], [bigint[]], "view">;

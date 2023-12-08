@@ -23,21 +23,7 @@ const AddPoint = () => {
   const [address, setAddress] = useState<string>("");
   const [point, setPoint] = useState<number>(1);
   const { campaignId } = GetrunningCampaing();
-  // const { writeAsync, isError, isSuccess } = useContractWrite({
-  //   address: addressList.CryptoCoffPoint,
-  //   abi: CryptoCoffPoint__factory.abi,
-  //   functionName: "addPoint",
-  //   args: [
-  //     address as `0x${string}`,
-  //     BigInt(point),
-  //     BigInt(Number(campaignId || 0)),
-  //   ],
-  //   onError: (error) => {
-  //     console.log(error);
-  //   },
-  // });
 
-  // using chainlink
   const { writeAsync, isError, isSuccess } = useContractWrite({
     address: addressList.MemberEmitLog,
     abi: MemberEmitLog__factory.abi,

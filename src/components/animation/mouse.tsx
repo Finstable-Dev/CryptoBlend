@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function mouse() {
+export default function Mouse() {
   return (
     <div>
       <Image

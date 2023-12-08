@@ -62,6 +62,7 @@ export interface ICryptoCoffPointInterface extends Interface {
       | "claimPoint"
       | "getTokenOfOwnerByIndex"
       | "performUpkeep"
+      | "setNewTokenURI"
       | "supportsInterface"
       | "tokenURI"
   ): FunctionFragment;
@@ -95,6 +96,10 @@ export interface ICryptoCoffPointInterface extends Interface {
     values: [BytesLike]
   ): string;
   encodeFunctionData(
+    functionFragment: "setNewTokenURI",
+    values: [BigNumberish, string]
+  ): string;
+  encodeFunctionData(
     functionFragment: "supportsInterface",
     values: [BytesLike]
   ): string;
@@ -120,6 +125,10 @@ export interface ICryptoCoffPointInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "performUpkeep",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setNewTokenURI",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -210,6 +219,12 @@ export interface ICryptoCoffPoint extends BaseContract {
     "nonpayable"
   >;
 
+  setNewTokenURI: TypedContractMethod<
+    [_tokenId: BigNumberish, _tokenURI: string],
+    [void],
+    "nonpayable"
+  >;
+
   supportsInterface: TypedContractMethod<
     [interfaceId: BytesLike],
     [boolean],
@@ -247,6 +262,13 @@ export interface ICryptoCoffPoint extends BaseContract {
   getFunction(
     nameOrSignature: "performUpkeep"
   ): TypedContractMethod<[performData: BytesLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "setNewTokenURI"
+  ): TypedContractMethod<
+    [_tokenId: BigNumberish, _tokenURI: string],
+    [void],
+    "nonpayable"
+  >;
   getFunction(
     nameOrSignature: "supportsInterface"
   ): TypedContractMethod<[interfaceId: BytesLike], [boolean], "view">;

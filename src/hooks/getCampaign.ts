@@ -22,31 +22,30 @@ export function useGetAllCampaigns() {
 }
 
 export function GetrunningCampaing() {
-  const { campaigns } = useGetAllCampaigns()
-  const [campaignId, setCampaignId] = useState<number | undefined>(undefined)
+  const { campaigns } = useGetAllCampaigns();
+  const [campaignId, setCampaignId] = useState<number | undefined>(undefined);
   const contract = {
     address: addressList.Campaign,
     abi: Campaign__factory.abi,
     functionName: "isRunningCampaign",
-  }
-  const contracts: any[] = []
+  };
+  const contracts: any[] = [];
 
   campaigns.map((item) => {
-    contracts.push({ ...contract, args: [BigInt(item)] })
-  })
+    contracts.push({ ...contract, args: [BigInt(item)] });
+  });
 
   const { data } = useContractReads({
-    contracts
-  })
+    contracts,
+  });
 
   useEffect(() => {
     data?.map((dataitem, index) => {
-      if (dataitem.result === true) return setCampaignId(campaigns[index])
-    })
-  }, [campaigns, setCampaignId])
+      if (dataitem.result === true) return setCampaignId(campaigns[index]);
+    });
+  }, [campaigns, setCampaignId, data]);
 
-  return { campaignId }
-
+  return { campaignId };
 }
 
 export function useGetCampaignInfo(id: number) {
@@ -87,12 +86,12 @@ export function useGetMultipleCampaignInfo(id: number[]) {
     // return data?.map((item) => item.result as IDetailCampaign);
     return data?.map((item, index) => ({
       id: id[index],
-      name: (item.result as IDetailCampaign).name,
-      description: (item.result as IDetailCampaign).description,
-      baseURI: (item.result as IDetailCampaign).baseURI,
-      timeStart: (item.result as IDetailCampaign).timeStart,
-      timeEnd: (item.result as IDetailCampaign).timeEnd,
-      nftId: (item.result as IDetailCampaign).nftId,
+      name: (item.result as IDetailCampaign)?.name,
+      description: (item.result as IDetailCampaign)?.description,
+      baseURI: (item.result as IDetailCampaign)?.baseURI,
+      timeStart: (item.result as IDetailCampaign)?.timeStart,
+      timeEnd: (item.result as IDetailCampaign)?.timeEnd,
+      nftId: (item.result as IDetailCampaign)?.nftId,
     }));
   }, [data, id]);
 

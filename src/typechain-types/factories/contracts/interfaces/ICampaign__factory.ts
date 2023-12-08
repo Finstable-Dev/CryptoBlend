@@ -54,10 +54,28 @@ const _abi = [
         name: "_timeEnd",
         type: "uint256",
       },
+      {
+        internalType: "uint256",
+        name: "_expireClaim",
+        type: "uint256",
+      },
     ],
     name: "createCampaign",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getAllCampaign",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "id",
+        type: "uint256[]",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -114,6 +132,11 @@ const _abi = [
           {
             internalType: "uint256",
             name: "timeEnd",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "expireClaim",
             type: "uint256",
           },
           {
