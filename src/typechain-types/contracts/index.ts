@@ -7,4 +7,5 @@ export type { Admin } from "./Admin";
 export type { Campaign } from "./Campaign";
 export type { CryptoCoffMember } from "./CryptoCoffMember";
 export type { CryptoCoffPoint } from "./CryptoCoffPoint";
+export type { ExpiredClaim } from "./ExpiredClaim";
 export type { MemberEmitLog } from "./MemberEmitLog";

@@ -185,6 +185,24 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "uint256",
+        name: "_tokenId",
+        type: "uint256",
+      },
+      {
+        internalType: "string",
+        name: "_tokenURI",
+        type: "string",
+      },
+    ],
+    name: "setNewTokenURI",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "bytes4",
         name: "interfaceId",
         type: "bytes4",

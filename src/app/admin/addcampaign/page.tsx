@@ -93,6 +93,7 @@ const Addcampaign = () => {
         jsonBaseUrl,
         BigInt(Math.floor(new Date(selectedStartDate).getTime() / 1000)),
         BigInt(Math.floor(new Date(selecteEndDate).getTime() / 1000)),
+        BigInt(60 * 60 * 60 * 24), // 60 days
       ],
     });
   };

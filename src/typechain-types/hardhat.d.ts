@@ -14,6 +14,18 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
+      name: "AutomationBase",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AutomationBase__factory>;
+    getContractFactory(
+      name: "AutomationCompatible",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AutomationCompatible__factory>;
+    getContractFactory(
+      name: "AutomationCompatibleInterface",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AutomationCompatibleInterface__factory>;
+    getContractFactory(
       name: "IERC1155Errors",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC1155Errors__factory>;
@@ -90,6 +102,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.CryptoCoffPoint__factory>;
     getContractFactory(
+      name: "ExpiredClaim",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ExpiredClaim__factory>;
+    getContractFactory(
       name: "ICampaign",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ICampaign__factory>;
@@ -111,6 +127,21 @@ declare module "hardhat/types/runtime" {
     ): Promise<Contracts.MemberEmitLog__factory>;
 
     getContractAt(
+      name: "AutomationBase",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AutomationBase>;
+    getContractAt(
+      name: "AutomationCompatible",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AutomationCompatible>;
+    getContractAt(
+      name: "AutomationCompatibleInterface",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AutomationCompatibleInterface>;
+    getContractAt(
       name: "IERC1155Errors",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -205,6 +236,11 @@ declare module "hardhat/types/runtime" {
       address: string | ethers.Addressable,
       signer?: ethers.Signer
     ): Promise<Contracts.CryptoCoffPoint>;
+    getContractAt(
+      name: "ExpiredClaim",
+      address: string | ethers.Addressable,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ExpiredClaim>;
     getContractAt(
       name: "ICampaign",
       address: string | ethers.Addressable,
@@ -232,6 +268,18 @@ declare module "hardhat/types/runtime" {
     ): Promise<Contracts.MemberEmitLog>;
 
     deployContract(
+      name: "AutomationBase",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.AutomationBase>;
+    deployContract(
+      name: "AutomationCompatible",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.AutomationCompatible>;
+    deployContract(
+      name: "AutomationCompatibleInterface",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.AutomationCompatibleInterface>;
+    deployContract(
       name: "IERC1155Errors",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.IERC1155Errors>;
@@ -307,6 +355,10 @@ declare module "hardhat/types/runtime" {
       name: "CryptoCoffPoint",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.CryptoCoffPoint>;
+    deployContract(
+      name: "ExpiredClaim",
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ExpiredClaim>;
     deployContract(
       name: "ICampaign",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -329,6 +381,21 @@ declare module "hardhat/types/runtime" {
     ): Promise<Contracts.MemberEmitLog>;
 
     deployContract(
+      name: "AutomationBase",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.AutomationBase>;
+    deployContract(
+      name: "AutomationCompatible",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.AutomationCompatible>;
+    deployContract(
+      name: "AutomationCompatibleInterface",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.AutomationCompatibleInterface>;
+    deployContract(
       name: "IERC1155Errors",
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -423,6 +490,11 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.CryptoCoffPoint>;
+    deployContract(
+      name: "ExpiredClaim",
+      args: any[],
+      signerOrOptions?: ethers.Signer | DeployContractOptions
+    ): Promise<Contracts.ExpiredClaim>;
     deployContract(
       name: "ICampaign",
       args: any[],
