@@ -128,7 +128,8 @@ const CardCollection: React.FC<{
                     />
                   </div>
                   <span className=" text-2xl font-semibold">{item.name}</span>
-                  {item.attributes[0].value === 10 ? (
+                  {item.name.toLowerCase() ===
+                  "You have claimed this NFT".toLowerCase() ? (
                     <div className=" flex flex-col ">
                       <span className="text-[#FF890A] text-sm font-semibold">
                         Quantity
