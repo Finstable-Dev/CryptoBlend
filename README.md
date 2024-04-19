@@ -14,19 +14,39 @@ This repository contains the source code of the Chainlink project. This platform
 1. Nodejs >18.18.2
 
 ## Setup
+create .env and use  
+1,`NEXT_PUBLIC_NFT_STORAGE_TOKEN` Can be found from nft storage.
+2.`NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID` Can be found from wellet connect.
 
-1. Copy `.env.example` and rename to `.env.local`
-2. Update the `NEXT_PUBLIC_PROD_API_URL` and `NEXT_PUBLIC_DEV_API_URL` to be the API url you're using.
+### Installation
+1. **Clone the Repository**: 
 
+   ```bash
+   git clone https://github.com/Finstable-Dev/CryptoBlend.git
+   ```
+   
+2. **Navigate to the Project Directory**:
 
-## Installation
+   ```bash
+   cd CryptoBlend
+   ```
+4. **Install Dependencies**:
+   
+   ```bash
+   npm install
+   ```
+   
+### Usage
 
-1. Clone this repository
-2. Run `npm i` to download dependencies
+4. **Run the Development Server**:
+   
+   ```bash
+   npm run dev
+   ```
 
-## Run local development server
+5. **Access the Website**:
+   Once the server is running, access the CryptoBlend  at [http://localhost:3000](http://localhost:3000) in your web browser.
 
-1. Run `npm run dev`
 
 ## Deployment
 
