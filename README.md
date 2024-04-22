@@ -47,7 +47,18 @@ create .env and use
 5. **Access the Website**:
    Once the server is running, access the CryptoBlend  at [http://localhost:3000](http://localhost:3000) in your web browser.
 
+## Contributing
 
+We welcome contributions from the community! If you'd like to contribute to the Cryptoblend frontend, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them with descriptive messages.
+4. Push your changes to your fork.
+5. Submit a pull request to the main branch of the original repository.
+
+## Support
+   If you encounter any issues or have any questions about the Cryptoblend frontend, please feel free to reach out to us at dev@finstable.co.th
 ## Deployment
 
 This project is deployed on Vercel. You can import this project to Vercel via Gitub.
